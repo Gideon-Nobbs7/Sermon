@@ -157,6 +157,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# App data
+data/sermons.db
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -216,3 +219,4 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+AGENTS.md
