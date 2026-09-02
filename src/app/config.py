@@ -17,6 +17,15 @@ class Settings(BaseSettings):
     embedding_model: str = "text-embedding-3-small"
     embedding_dimensions: int = 1536
 
+    llm_base_url: str
+    llm_model: str
+    llm_api_key: str = ""
+
+    openai_api_key: str = ""
+
+    telegram_bot_token: str = ""
+    telegram_webhook_secret: str = ""
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
