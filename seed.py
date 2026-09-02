@@ -10,9 +10,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 from pathlib import Path
 from typing import List
+
+from src.app.context import new_request_id, request_scope
+from src.app.logging import setup_logging
 
 from src.app.config import settings
 from src.app.db.database import (
@@ -72,6 +76,8 @@ def index_chunks(conn, chunks: List[Chunk], embed_service) -> int:
 
 
 def main() -> None:
+    setup_logging(settings.log_level)
+    logger = logging.getLogger("seed")
     parser = argparse.ArgumentParser(description="Seed the sermon corpus")
     parser.add_argument("--sermon-file", default=None, help="path to the sermon markdown")
     parser.add_argument("--db", default=None, help="path to the SQLite database")
@@ -81,16 +87,18 @@ def main() -> None:
     data_dir = settings.data_dir
     data_dir.mkdir(parents=True, exist_ok=True)
 
-    chunks = collect_chunks(sermon_file, data_dir)
+    with request_scope(request_id=new_request_id(), operation="seed"):
+        logger.info("collecting chunks from %s and %s", sermon_file, data_dir)
+        chunks = collect_chunks(sermon_file, data_dir)
 
-    conn = get_connection(args.db)
-    init_db(conn, dimensions=settings.embedding_dimensions)
-    embed_service = StubEmbeddingService(dimensions=settings.embedding_dimensions)
-    inserted = index_chunks(conn, chunks, embed_service)
+        conn = get_connection(args.db)
+        init_db(conn, dimensions=settings.embedding_dimensions)
+        embed_service = StubEmbeddingService(dimensions=settings.embedding_dimensions)
+        inserted = index_chunks(conn, chunks, embed_service)
 
-    total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
-    print(f"collected={len(chunks)} new={inserted} total={total}")
-    conn.close()
+        total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
+        logger.info("collected=%d new=%d total=%d", len(chunks), inserted, total)
+        conn.close()
 
 
 if __name__ == "__main__":
