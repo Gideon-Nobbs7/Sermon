@@ -76,15 +76,15 @@ def index_chunks(conn, chunks: List[Chunk], embed_service) -> int:
 
 
 def main() -> None:
-    setup_logging(settings.log_level)
+    setup_logging(settings.LOG_LEVEL)
     logger = logging.getLogger("seed")
     parser = argparse.ArgumentParser(description="Seed the sermon corpus")
     parser.add_argument("--sermon-file", default=None, help="path to the sermon markdown")
     parser.add_argument("--db", default=None, help="path to the SQLite database")
     args = parser.parse_args()
 
-    sermon_file = Path(args.sermon_file) if args.sermon_file else settings.sermon_file_path
-    data_dir = settings.data_dir
+    sermon_file = Path(args.sermon_file) if args.sermon_file else settings.SERMON_FILE_PATH
+    data_dir = settings.DATA_DIR
     data_dir.mkdir(parents=True, exist_ok=True)
 
     with request_scope(request_id=new_request_id(), operation="seed"):
@@ -92,8 +92,8 @@ def main() -> None:
         chunks = collect_chunks(sermon_file, data_dir)
 
         conn = get_connection(args.db)
-        init_db(conn, dimensions=settings.embedding_dimensions)
-        embed_service = StubEmbeddingService(dimensions=settings.embedding_dimensions)
+        init_db(conn, dimensions=settings.EMBEDDING_DIMENSIONS)
+        embed_service = StubEmbeddingService(dimensions=settings.EMBEDDING_DIMENSIONS)
         inserted = index_chunks(conn, chunks, embed_service)
 
         total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
