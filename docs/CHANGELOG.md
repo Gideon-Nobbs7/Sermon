@@ -1,5 +1,28 @@
 # Changelog
 
+## Scope 2 — The Question-Answering Bot (2 Sept 2026)
+
+What this round built:
+
+- Wired real embeddings (OpenAI) and a real answering model (DeepSeek), so
+  the bot can now actually answer questions about the sermons.
+- Added a search step that finds the most relevant sermon passages for a
+  question, and an answer step that writes a response grounded in those
+  passages with metadata.
+- Built a web backend with a couple of endpoints: a simple one for testing
+  questions directly, plus the hooks Telegram will call. WhatsApp is wired
+  the same way and only needs its integration finished to go live.
+- Added conversation in memory history: it keeps recent turns in memory
+  and saves them so history survives a restart, and it uses the last few
+  exchanges to make sense of follow-up questions.
+- Added a request id to every action. If something goes wrong, logs are
+  tagged so you can trace exactly what happened for that one question.
+- Replaced plain error responses with friendly messages: the person asking
+  sees a clear "what went wrong", and the technical details are only kept
+  in the server logs.
+- Prepared for Telegram by adding the bot library, and left a clean slot
+  for WhatsApp/Twilio later.
+
 ## Scope 1 — Foundations (1 Sept 2026)
 
 What this round built:

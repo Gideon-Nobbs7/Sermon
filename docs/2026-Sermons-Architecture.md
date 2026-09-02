@@ -131,7 +131,7 @@ An intelligent **Sermon Question-Answering Bot** deployed on **Telegram** or **W
 
 | Component | Technology | Justification |
 |---|---|---|
-| **LLM** | OpenAI GPT-4o-mini | Cheap (~$0.15/M input tokens), fast, excellent RAG performance |
+| **LLM** | DeepSeek `deepseek-v4-flash` | OpenAI-compatible API, cheap and fast, grounded RAG answers |
 | **Embedding Model** | OpenAI text-embedding-3-small | 1536-dim, $0.02/M tokens, state-of-the-art retrieval quality |
 | **Vector Search** | sqlite-vec | Zero-infrastructure, single .db file, native SQL queries |
 | **Semantic Chunking** | Custom parser | Respects sermon boundaries (ie not splitting across dates) |
@@ -306,12 +306,26 @@ What did Pastor Richard say about the Spirit of Might?
 
 ## 6. API Endpoints
 
+### Request lifecycle & errors
+
+Every request is wrapped in a request scope (contextvars) with a short
+`req_xxxxxxxx` id. The logging filter stamps that id on every log line so a
+request's whole lifecycle can be traced even when async tasks interleave.
+
+Errors go through `AppError(status_code, detail, error)` instead of
+`HTTPException`: `detail` is human-facing and returned to the client;
+`error` is developer-facing and only written to the server log alongside the
+stack trace, tagged with the request id. Unexpected exceptions return a
+generic 500 and are never leaked.
+
+### Endpoints
+
 | Method | Path | Auth | Purpose | Request Body | Response |
 |---|---|---|---|---|---|
 | `POST` | `/webhook/telegram` | Secret token header | Receive Telegram updates | `Update` (Telegram JSON) | `200 OK` |
 | `POST` | `/webhook/whatsapp` | Twilio signature check | Receive WhatsApp messages | `Twilio.Message` form data | `<Response>` TwiML |
 | `POST` | `/query` | (optional API key) | Direct REST query for testing | `{"question": "...", "k": 5}` | `{"answer": "...", "sources": [...]}` |
-| `GET` | `/health` | None | Health check / readiness probe | — | `{"status": "ok", "chunks": 47}` |
+| `GET` | `/health` | None | Health check / readiness probe (checks DB) | — | `{"status": "ok", "db": "ok"}` or 503 `{"status": "degraded", "db": "error"}` |
 | `GET` | `/docs` | None | Auto-generated Swagger UI | — | Swagger HTML |
 
 ---
@@ -364,10 +378,16 @@ Sermon/
         └── test_db.py               # Schema, vec0 queries (sync + async)
 
 Planned in later scopes:
-    ├── src/app/main.py              # FastAPI app factory, lifespan events (scope 2/4)
-    ├── src/app/routers/             # query, telegram, whatsapp endpoints (scope 2/4)
-    ├── src/app/services/retriever.py   # sqlite-vec queries (scope 2)
-    ├── src/app/services/generator.py   # LLM answer generation (scope 2)
+    ├── src/app/main.py                # FastAPI app factory, lifespan, request-scope middleware
+    ├── src/app/routers/               # query, telegram, whatsapp endpoints
+    ├── src/app/messaging/             # Messenger protocol + Telegram / WhatsApp (scaffold) impls
+    ├── src/app/services/retriever.py  # sqlite-vec queries
+    ├── src/app/services/generator.py  # DeepSeek answer generation
+    ├── src/app/services/history.py    # ChatHistoryStore (memory + SQLite)
+    ├── src/app/services/qa.py         # QA orchestration: history -> retrieve -> generate
+    ├── src/app/errors.py              # AppError + exception handlers
+    ├── src/app/context.py             # request context (contextvars) for async lifecycle
+    ├── src/app/logging.py             # request-id logging filter
     ├── watcher.py                   # watchdog file watcher (scope 3)
     ├── Dockerfile
     └── docker-compose.yml
@@ -407,6 +427,24 @@ CREATE VIRTUAL TABLE sermons_embeddings USING vec0(
     chunk_id TEXT PRIMARY KEY,             -- FK to sermons.id
     embedding FLOAT[1536] distance_metric=cosine
 );
+```
+
+### Table: `chat_history`
+
+Persists per-chat conversation turns. Recent turns are also kept in memory
+(`ChatHistoryStore`), written through to this table, and the last 8 turns are
+re-loaded on first touch.
+
+```sql
+CREATE TABLE chat_history (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    chat_id    TEXT NOT NULL,    
+    role       TEXT NOT NULL,
+    content    TEXT NOT NULL,
+    created_at TEXT DEFAULT (datetime('now'))
+);
+
+CREATE INDEX idx_chat_history_chat ON chat_history(chat_id, id);
 ```
 
 ### ER Diagram
