@@ -79,7 +79,7 @@ def create_app(
     async def health():
         try:
             async with get_async_db(db_path) as conn:
-                await conn.execute("SELECT COUNT(*) FROM chunks")
+                await conn.execute("SELECT 1 FROM chunks LIMIT 1")
         except Exception:
             logger.exception("health check: db unavailable")
             return JSONResponse(status_code=503, content={"status": "degraded", "db": "error"})
