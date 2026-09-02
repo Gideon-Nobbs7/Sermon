@@ -6,25 +6,27 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """App configuration from environment and `.env`."""
 
-    app_env: str = "development"
-    log_level: str = "INFO"
+    APP_ENV: str = "development"
+    LOG_LEVEL: str = "INFO"
 
-    sqlite_db_path: Path = Path("./data/sermons.db")
+    SQLITE_DB_PATH: Path = Path("./data/sermons.db")
 
-    data_dir: Path = Path("./data")
-    sermon_file_path: Path = Path("./data/2026-Sermons.md")
+    DATA_DIR: Path = Path("./data")
+    SERMON_FILE_PATH: Path = Path("./data/2026-Sermons.md")
 
-    embedding_model: str = "text-embedding-3-small"
-    embedding_dimensions: int = 1536
+    EMBEDDING_MODEL: str = "text-embedding-3-small"
+    EMBEDDING_DIMENSIONS: int = 1536
+    OPENAI_EMBEDDINGS_URL: str = "https://api.openai.com/v1/embeddings"
 
-    llm_base_url: str
-    llm_model: str
-    llm_api_key: str = ""
+    LLM_BASE_URL: str
+    LLM_MODEL: str
+    LLM_API_KEY: str = ""
 
-    openai_api_key: str = ""
+    OPENAI_API_KEY: str = ""
 
-    telegram_bot_token: str = ""
-    telegram_webhook_secret: str = ""
+    TELEGRAM_BOT_TOKEN: str = ""
+    TELEGRAM_WEBHOOK_SECRET: str = ""
+    TELEGRAM_SECRET_HEADER: str = "X-Telegram-Bot-Api-Secret-Token"
 
     model_config = SettingsConfigDict(
         env_file=".env",

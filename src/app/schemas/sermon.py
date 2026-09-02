@@ -10,8 +10,6 @@ class SourceType(str, Enum):
 
 @dataclass
 class Chunk:
-    """A normalized, indexable text chunk with source metadata."""
-
     id: str
     source_file: str
     text: str

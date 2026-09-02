@@ -32,11 +32,21 @@ CREATE VIRTUAL TABLE IF NOT EXISTS chunks_embeddings USING vec0(
     chunk_id  TEXT PRIMARY KEY,
     embedding FLOAT[{dim}] distance_metric=cosine
 );
+
+CREATE TABLE IF NOT EXISTS chat_history (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    chat_id    TEXT NOT NULL,
+    role       TEXT NOT NULL,
+    content    TEXT NOT NULL,
+    created_at TEXT DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_chat_history_chat ON chat_history(chat_id, id);
 """
 
 
 def get_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
-    path = db_path or str(settings.sqlite_db_path)
+    path = db_path or str(settings.SQLITE_DB_PATH)
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     conn.enable_load_extension(True)
@@ -61,7 +71,7 @@ def get_db(db_path: Optional[str] = None) -> Iterator[sqlite3.Connection]:
 
 
 async def get_async_connection(db_path: Optional[str] = None) -> aiosqlite.Connection:
-    path = db_path or str(settings.sqlite_db_path)
+    path = db_path or str(settings.SQLITE_DB_PATH)
     conn = await aiosqlite.connect(path)
     conn.row_factory = aiosqlite.Row
     await conn.enable_load_extension(True)
