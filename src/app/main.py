@@ -23,6 +23,14 @@ from .services.retriever import Retriever
 
 logger = logging.getLogger("app")
 
+_REQUIRED_KEYS = {
+    "OPENAI_API_KEY": "embeddings",
+    "LLM_API_KEY": "DeepSeek answers",
+    "TELEGRAM_BOT_TOKEN": "the Telegram bot",
+    "TELEGRAM_WEBHOOK_SECRET": "Telegram webhook auth",
+    "TELEGRAM_SECRET_HEADER": "Telegram webhook header",
+}
+
 
 def create_app(
     *,
@@ -31,9 +39,19 @@ def create_app(
     whatsapp_messenger: Optional[WhatsAppMessenger] = None,
     db_path: Optional[str] = None,
 ) -> FastAPI:
+    built_internally = qa is None
+
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         setup_logging(settings.LOG_LEVEL)
+        if built_internally:
+            for name, purpose in _REQUIRED_KEYS.items():
+                if not getattr(settings, name):
+                    logger.warning(
+                        "%s has not been set - %s will fail until it is added",
+                        name,
+                        purpose,
+                    )
         conn = get_connection(db_path)
         init_db(conn, dimensions=settings.EMBEDDING_DIMENSIONS)
         conn.close()

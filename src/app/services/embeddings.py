@@ -5,6 +5,7 @@ from typing import List, Optional, Protocol
 import httpx
 
 from ..config import settings
+from ..errors import AppError
 
 
 class EmbeddingService(Protocol):
@@ -42,7 +43,16 @@ class OpenAIEmbeddingService:
     def _extract(payload: dict) -> List[List[float]]:
         return [item["embedding"] for item in payload["data"]]
 
+    def _require_key(self) -> None:
+        if not self._api_key:
+            raise AppError(
+                500,
+                "OPENAI_API_KEY has not been set. Add it to enable corpus and question embedding.",
+                "openai_api_key_missing",
+            )
+
     def embed(self, texts: List[str]) -> List[List[float]]:
+        self._require_key()
         resp = httpx.post(
             self._url,
             headers=self._headers(self._api_key),
@@ -53,6 +63,7 @@ class OpenAIEmbeddingService:
         return self._extract(resp.json())
 
     async def aembed(self, texts: List[str]) -> List[List[float]]:
+        self._require_key()
         async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(
                 self._url,

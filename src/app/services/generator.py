@@ -5,6 +5,7 @@ from typing import List, Optional
 import httpx
 
 from ..config import settings
+from ..errors import AppError
 from ..schemas.sermon import Chunk
 
 
@@ -59,6 +60,12 @@ class Generator:
         question: str,
         history: Optional[List[dict]] = None,
     ) -> str:
+        if not self.api_key:
+            raise AppError(
+                500,
+                "LLM_API_KEY has not been set. Add it to enable question answering.",
+                "llm_api_key_missing",
+            )
         payload = {
             "model": self.model,
             "messages": self.build_messages(chunks, question, history),

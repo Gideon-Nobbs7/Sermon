@@ -2,7 +2,9 @@ import asyncio
 from unittest.mock import Mock
 
 import httpx
+import pytest
 
+from src.app.errors import AppError
 from src.app.services.embeddings import OpenAIEmbeddingService
 
 
@@ -46,3 +48,15 @@ def test_async_aembed_posts_and_extracts(monkeypatch):
         return await svc.aembed(["q1", "q2"])
 
     assert asyncio.run(main()) == [[0.5], [0.6]]
+
+
+def test_embed_requires_api_key():
+    svc = OpenAIEmbeddingService(api_key="")
+    with pytest.raises(AppError, match="OPENAI_API_KEY"):
+        svc.embed(["q"])
+
+
+def test_aembed_requires_api_key():
+    svc = OpenAIEmbeddingService(api_key="")
+    with pytest.raises(AppError, match="OPENAI_API_KEY"):
+        asyncio.run(svc.aembed(["q"]))

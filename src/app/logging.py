@@ -4,8 +4,8 @@ import logging
 
 from .context import get_request_id
 
-_FORMAT = "%(asctime)s %(levelname)s %(request_id)s%(name)s: %(message)s"
 
+_FORMAT = "%(asctime)s %(levelname)s %(request_id)s%(name)s: %(message)s"
 
 class RequestContextFilter(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:

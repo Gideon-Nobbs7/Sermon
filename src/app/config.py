@@ -26,7 +26,7 @@ class Settings(BaseSettings):
 
     TELEGRAM_BOT_TOKEN: str = ""
     TELEGRAM_WEBHOOK_SECRET: str = ""
-    TELEGRAM_SECRET_HEADER: str = "X-Telegram-Bot-Api-Secret-Token"
+    TELEGRAM_SECRET_HEADER: str = ""
 
     model_config = SettingsConfigDict(
         env_file=".env",

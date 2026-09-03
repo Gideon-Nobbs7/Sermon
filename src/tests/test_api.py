@@ -1,3 +1,6 @@
+import logging
+
+import pytest
 from fastapi.testclient import TestClient
 
 from src.app.config import settings
@@ -119,3 +122,23 @@ def test_unexpected_error_does_not_leak(tmp_path):
     assert resp.status_code == 500
     assert resp.json() == {"detail": "Internal server error"}
     assert "kaboom" not in resp.text
+
+
+def test_telegram_webhook_requires_bot_token(tmp_path, monkeypatch):
+    monkeypatch.setattr(settings, "TELEGRAM_BOT_TOKEN", "")
+    qa = FakeQA()
+    with _client(tmp_path, qa) as client:
+        resp = client.post("/webhook/telegram", json={})
+    assert resp.status_code == 500
+    assert "Telegram is not configured" in resp.json()["detail"]
+
+
+def test_startup_warns_when_keys_missing(tmp_path, monkeypatch, caplog):
+    monkeypatch.setattr(settings, "OPENAI_API_KEY", "")
+    monkeypatch.setattr(settings, "LLM_API_KEY", "")
+    app = create_app(db_path=str(tmp_path / "warn.db"))
+    caplog.set_level(logging.WARNING)
+    with TestClient(app):
+        pass
+    assert any("OPENAI_API_KEY has not been set" in r.message for r in caplog.records)
+    assert any("LLM_API_KEY has not been set" in r.message for r in caplog.records)

@@ -2,7 +2,10 @@ import asyncio
 from unittest.mock import Mock
 
 import httpx
+import pytest
 
+from src.app.config import settings
+from src.app.errors import AppError
 from src.app.schemas.sermon import Chunk, SourceType
 from src.app.services.generator import Generator, SYSTEM_PROMPT, build_user_message
 
@@ -99,3 +102,10 @@ def test_generate_includes_history_turns(monkeypatch):
 
     roles = [m["role"] for m in captured["json"]["messages"]]
     assert roles == ["system", "user", "assistant", "user"]
+
+
+def test_generate_requires_api_key(monkeypatch):
+    monkeypatch.setattr(settings, "LLM_API_KEY", "")
+    gen = Generator(api_key="")
+    with pytest.raises(AppError, match="LLM_API_KEY"):
+        asyncio.run(gen.generate([_chunk("note")], "q"))
