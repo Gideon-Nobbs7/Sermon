@@ -324,7 +324,7 @@ generic 500 and are never leaked.
 |---|---|---|---|---|---|
 | `POST` | `/webhook/telegram` | Secret token header | Receive Telegram updates | `Update` (Telegram JSON) | `200 OK` |
 | `POST` | `/webhook/whatsapp` | Twilio signature check | Receive WhatsApp messages | `Twilio.Message` form data | `<Response>` TwiML |
-| `POST` | `/query` | (optional API key) | Direct REST query for testing | `{"question": "...", "k": 5}` | `{"answer": "...", "sources": [...]}` |
+| `POST` | `/query` | (optional API key) | Direct REST query for testing | `{"question": "..."}` | `{"answer": "...", "sources": [...]}` |
 | `GET` | `/health` | None | Health check / readiness probe (checks DB) | — | `{"status": "ok", "db": "ok"}` or 503 `{"status": "degraded", "db": "error"}` |
 | `GET` | `/docs` | None | Auto-generated Swagger UI | — | Swagger HTML |
 

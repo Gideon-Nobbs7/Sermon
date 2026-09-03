@@ -116,6 +116,7 @@ Sermon notes are stored in a markdown file (`2026-Sermons.md`). A parser extract
    ```bash
    curl -X POST "https://api.telegram.org/bot<BOT_TOKEN>/setWebhook?url=https://<domain>/webhook/telegram&secret_token=<SECRET>"
    ```
+   curl -X POST "https://api.telegram.org/bot8659833694:AAFvGBCT34Nbqu_OUpFAqrN34HbmAgNSnY0/setWebhook?url=https://spectroscopical-nonaltruistic-anamaria.ngrok-free.dev/webhook/telegram&secret_token=dl0HqVeP37VesJzXwZqS-T4STgGlNOZMKQwJtX5XB8Q
 
 ## Deployment
 
