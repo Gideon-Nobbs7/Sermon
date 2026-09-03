@@ -63,23 +63,19 @@ def test_health_reports_db_degraded(tmp_path):
 def test_query_returns_answer_and_sources(tmp_path):
     qa = FakeQA()
     with _client(tmp_path, qa) as client:
-        resp = client.post("/query", json={"question": "what was taught?"})
+        resp = client.post("/query", json={"question": "what was taught?", "k": 3, "session_id": "s1"})
 
     assert resp.status_code == 200
     body = resp.json()
     assert body["answer"] == "ans"
     assert body["sources"][0]["speaker"] == "Ps. Richard"
-    assert len(qa.calls) == 1
-    session_id, question, k = qa.calls[0]
-    assert question == "what was taught?"
-    assert k is None
-    assert session_id  # server-generated, non-empty
+    assert qa.calls == [("s1", "what was taught?", 3)]
 
 
 def test_query_validation(tmp_path):
     qa = FakeQA()
     with _client(tmp_path, qa) as client:
-        resp = client.post("/query", json={})
+        resp = client.post("/query", json={"question": "q", "k": 0})
     assert resp.status_code == 422
 
 
