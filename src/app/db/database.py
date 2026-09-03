@@ -2,14 +2,16 @@
 
 import sqlite3
 from contextlib import asynccontextmanager, contextmanager
-from typing import AsyncIterator, Iterator, Optional, Sequence
+from typing import AsyncIterator, Iterator, Optional, Sequence, Tuple
 
 import aiosqlite
 import sqlite_vec
 
 from ..config import settings
 
-_SCHEMA = """
+DEFAULT_EMBEDDING_DIMS: Tuple[int, ...] = (1536, 2048)
+
+_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS chunks (
     id          TEXT PRIMARY KEY,
     source_type TEXT NOT NULL,
@@ -25,13 +27,8 @@ CREATE TABLE IF NOT EXISTS chunks (
 );
 
 CREATE INDEX IF NOT EXISTS idx_chunks_source ON chunks(source_file);
-CREATE INDEX IF NOT EXISTS idx_chunks_date    ON chunks(date);
+CREATE INDEX IF NOT EXISTS idx_chunks_date ON chunks(date);
 CREATE INDEX IF NOT EXISTS idx_chunks_speaker ON chunks(speaker);
-
-CREATE VIRTUAL TABLE IF NOT EXISTS chunks_embeddings USING vec0(
-    chunk_id  TEXT PRIMARY KEY,
-    embedding FLOAT[{dim}] distance_metric=cosine
-);
 
 CREATE TABLE IF NOT EXISTS chat_history (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,6 +42,19 @@ CREATE INDEX IF NOT EXISTS idx_chat_history_chat ON chat_history(chat_id, id);
 """
 
 
+def embedding_table(dim: int) -> str:
+    return f"chunks_embeddings_{dim}"
+
+
+def _vec0_sql(dimensions: Tuple[int, ...]) -> str:
+    return "\n".join(
+        f"CREATE VIRTUAL TABLE IF NOT EXISTS {embedding_table(d)} USING vec0(\n"
+        f"    chunk_id TEXT PRIMARY KEY,\n"
+        f"    embedding FLOAT[{d}] distance_metric=cosine\n);"
+        for d in dimensions
+    )
+
+
 def get_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
     path = db_path or str(settings.SQLITE_DB_PATH)
     conn = sqlite3.connect(path)
@@ -55,9 +65,31 @@ def get_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
     return conn
 
 
-def init_db(conn: sqlite3.Connection, dimensions: int = 1536) -> None:
+def migrate_vec0(conn: sqlite3.Connection, dimensions: Tuple[int, ...]) -> None:
+    """Drop any embedding index not in the current dimension set (one-time)."""
+    keep = {embedding_table(d) for d in dimensions}
+    tables = [
+        r["name"]
+        for r in conn.execute(
+            "SELECT name FROM sqlite_master "
+            "WHERE type='table' AND name LIKE 'chunks_embeddings%'"
+        )
+    ]
+    for name in tables:
+        suffix = name[len("chunks_embeddings_"):]
+        is_main = name == "chunks_embeddings" or suffix.isdigit()
+        if is_main and name not in keep:
+            conn.execute(f"DROP TABLE {name}")
+    conn.commit()
+
+
+def init_db(
+    conn: sqlite3.Connection,
+    dimensions: Tuple[int, ...] = DEFAULT_EMBEDDING_DIMS,
+) -> None:
     conn.execute("PRAGMA journal_mode=WAL")
-    conn.executescript(_SCHEMA.format(dim=dimensions))
+    conn.executescript(_TABLE_SQL)
+    conn.executescript(_vec0_sql(dimensions))
     conn.commit()
 
 
@@ -80,9 +112,13 @@ async def get_async_connection(db_path: Optional[str] = None) -> aiosqlite.Conne
     return conn
 
 
-async def init_async_db(conn: aiosqlite.Connection, dimensions: int = 1536) -> None:
+async def init_async_db(
+    conn: aiosqlite.Connection,
+    dimensions: Tuple[int, ...] = DEFAULT_EMBEDDING_DIMS,
+) -> None:
     await conn.execute("PRAGMA journal_mode=WAL")
-    await conn.executescript(_SCHEMA.format(dim=dimensions))
+    await conn.executescript(_TABLE_SQL)
+    await conn.executescript(_vec0_sql(dimensions))
     await conn.commit()
 
 

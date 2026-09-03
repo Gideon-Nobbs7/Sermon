@@ -20,14 +20,41 @@ from src.app.logging import setup_logging
 
 from src.app.config import settings
 from src.app.db.database import (
+    embedding_table,
     get_connection,
     init_db,
     serialize_embedding,
 )
 from src.app.schemas.sermon import Chunk
-from src.app.services.embeddings import StubEmbeddingService
+from src.app.services.embeddings import OpenAIEmbeddingService
 from src.app.services.loaders import load_document
 from src.app.services.parser import SermonMarkdownParser
+
+logger = logging.getLogger("seed")
+
+
+def build_embed_services() -> List:
+    return [
+        (
+            OpenAIEmbeddingService(
+                api_key=settings.OPENAI_API_KEY,
+                model=settings.EMBEDDING_MODEL,
+                dimensions=settings.EMBEDDING_DIMENSIONS,
+            ),
+            settings.EMBEDDING_DIMENSIONS,
+        ),
+        (
+            OpenAIEmbeddingService(
+                api_key=settings.OPENROUTER_API_KEY,
+                model=settings.OPENROUTER_EMBEDDING_MODEL,
+                dimensions=settings.OPENROUTER_EMBEDDING_DIMENSIONS,
+                url=f"{settings.OPENROUTER_BASE_URL}/embeddings",
+                key_env="OPENROUTER_API_KEY",
+            ),
+            settings.OPENROUTER_EMBEDDING_DIMENSIONS,
+        ),
+    ]
+
 
 def collect_chunks(sermon_file: Path, data_dir: Path) -> List[Chunk]:
     chunks: List[Chunk] = []
@@ -46,38 +73,51 @@ def collect_chunks(sermon_file: Path, data_dir: Path) -> List[Chunk]:
     return chunks
 
 
-def index_chunks(conn, chunks: List[Chunk], embed_service) -> int:
+def index_chunks(conn, chunks: List[Chunk], embed_services: List) -> int:
     existing = {r["id"] for r in conn.execute("SELECT id FROM chunks")}
     new = [c for c in chunks if c.id not in existing]
-    if not new:
-        return 0
+    if new:
+        conn.executemany(
+            "INSERT INTO chunks (id, source_type, source_file, date, speaker, "
+            "topic_type, topic_title, scriptures, page, text) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    c.id, c.source_type.value, c.source_file, c.date, c.speaker,
+                    c.topic_type, c.topic_title,
+                    json.dumps(c.scriptures) if c.scriptures else None,
+                    c.page, c.text,
+                )
+                for c in new
+            ],
+        )
 
-    vectors = embed_service.embed([c.text for c in new])
-    conn.executemany(
-        "INSERT INTO chunks (id, source_type, source_file, date, speaker, "
-        "topic_type, topic_title, scriptures, page, text) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [
-            (
-                c.id, c.source_type.value, c.source_file, c.date, c.speaker,
-                c.topic_type, c.topic_title,
-                json.dumps(c.scriptures) if c.scriptures else None,
-                c.page, c.text,
-            )
-            for c in new
-        ],
-    )
-    conn.executemany(
-        "INSERT INTO chunks_embeddings (chunk_id, embedding) VALUES (?, ?)",
-        [(c.id, serialize_embedding(v)) for c, v in zip(new, vectors)],
-    )
+    indexed = 0
+    for service, dim in embed_services:
+        table = embedding_table(dim)
+        embedded = {
+            r["chunk_id"]
+            for r in conn.execute(f"SELECT chunk_id FROM {table}")
+        }
+        missing = [c for c in chunks if c.id not in embedded]
+        if not missing:
+            continue
+        try:
+            vectors = service.embed([c.text for c in missing])
+        except Exception as exc:
+            logger.warning("embedding provider %s failed during seed: %s", service.model, exc)
+            continue
+        conn.executemany(
+            f"INSERT INTO {table} (chunk_id, embedding) VALUES (?, ?)",
+            [(c.id, serialize_embedding(v)) for c, v in zip(missing, vectors)],
+        )
+        indexed += len(missing)
     conn.commit()
-    return len(new)
+    return indexed
 
 
 def main() -> None:
     setup_logging(settings.LOG_LEVEL)
-    logger = logging.getLogger("seed")
     parser = argparse.ArgumentParser(description="Seed the sermon corpus")
     parser.add_argument("--sermon-file", default=None, help="path to the sermon markdown")
     parser.add_argument("--db", default=None, help="path to the SQLite database")
@@ -92,9 +132,14 @@ def main() -> None:
         chunks = collect_chunks(sermon_file, data_dir)
 
         conn = get_connection(args.db)
-        init_db(conn, dimensions=settings.EMBEDDING_DIMENSIONS)
-        embed_service = StubEmbeddingService(dimensions=settings.EMBEDDING_DIMENSIONS)
-        inserted = index_chunks(conn, chunks, embed_service)
+        init_db(
+            conn,
+            dimensions=(
+                settings.EMBEDDING_DIMENSIONS,
+                settings.OPENROUTER_EMBEDDING_DIMENSIONS,
+            ),
+        )
+        inserted = index_chunks(conn, chunks, build_embed_services())
 
         total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
         logger.info("collected=%d new=%d total=%d", len(chunks), inserted, total)

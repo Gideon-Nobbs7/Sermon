@@ -20,7 +20,11 @@ def test_init_db_creates_tables(tmp_path):
             "SELECT name FROM sqlite_master WHERE type IN ('table', 'view')")
     }
     assert "chunks" in tables
-    assert "chunks_embeddings" in tables
+    assert "chunks_embeddings_1536" in tables
+    assert "chunks_embeddings_2048" in tables
+
+    cols = {r["name"] for r in conn.execute("PRAGMA table_info(chunks_embeddings_1536)")}
+    assert "embedding" in cols
     conn.close()
 
 
@@ -39,7 +43,7 @@ def test_insert_and_query(tmp_path):
     )
     vec = serialize_embedding([0.1] * 1536)
     conn.execute(
-        "INSERT INTO chunks_embeddings (chunk_id, embedding) VALUES (?, ?)",
+        "INSERT INTO chunks_embeddings_1536 (chunk_id, embedding) VALUES (?, ?)",
         ("2026-02-08_exhortation_0", vec),
     )
     conn.commit()
@@ -49,11 +53,38 @@ def test_insert_and_query(tmp_path):
     assert row["speaker"] == "Ps. Derrick"
 
     k = conn.execute(
-        "SELECT chunk_id, distance FROM chunks_embeddings "
+        "SELECT chunk_id, distance FROM chunks_embeddings_1536 "
         "WHERE embedding MATCH ? AND k = 5 ORDER BY distance",
         (serialize_embedding([0.1] * 1536),),
     ).fetchone()
     assert k["chunk_id"] == "2026-02-08_exhortation_0"
+    conn.close()
+
+
+def test_query_2048_table(tmp_path):
+    db = tmp_path / "test.db"
+    conn = get_connection(str(db))
+    init_db(conn)
+
+    conn.execute(
+        "INSERT INTO chunks (id, source_type, source_file, date, speaker, text) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        ("2026-02-15_rhema_0", SourceType.SERMON.value, "2026-Sermons.md",
+         "2026-02-15", "Ps. Richard", "note"),
+    )
+    vec = serialize_embedding([0.2] * 2048)
+    conn.execute(
+        "INSERT INTO chunks_embeddings_2048 (chunk_id, embedding) VALUES (?, ?)",
+        ("2026-02-15_rhema_0", vec),
+    )
+    conn.commit()
+
+    k = conn.execute(
+        "SELECT chunk_id, distance FROM chunks_embeddings_2048 "
+        "WHERE embedding MATCH ? AND k = 5 ORDER BY distance",
+        (serialize_embedding([0.2] * 2048),),
+    ).fetchone()
+    assert k["chunk_id"] == "2026-02-15_rhema_0"
     conn.close()
 
 
@@ -78,13 +109,13 @@ def test_async_session_loads_vec_and_queries(tmp_path):
         )
         vec = serialize_embedding([0.5] * 1536)
         await conn.execute(
-            "INSERT INTO chunks_embeddings (chunk_id, embedding) VALUES (?, ?)",
+            "INSERT INTO chunks_embeddings_1536 (chunk_id, embedding) VALUES (?, ?)",
             ("2026-03-01_rhema_0", vec),
         )
         await conn.commit()
 
         cur = await conn.execute(
-            "SELECT chunk_id, distance FROM chunks_embeddings "
+            "SELECT chunk_id, distance FROM chunks_embeddings_1536 "
             "WHERE embedding MATCH ? AND k = 5 ORDER BY distance",
             (serialize_embedding([0.5] * 1536),),
         )

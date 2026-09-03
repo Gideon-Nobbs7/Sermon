@@ -131,11 +131,31 @@ An intelligent **Sermon Question-Answering Bot** deployed on **Telegram** or **W
 
 | Component | Technology | Justification |
 |---|---|---|
-| **LLM** | DeepSeek `deepseek-v4-flash` | OpenAI-compatible API, cheap and fast, grounded RAG answers |
-| **Embedding Model** | OpenAI text-embedding-3-small | 1536-dim, $0.02/M tokens, state-of-the-art retrieval quality |
+| **LLM (primary)** | DeepSeek `deepseek-v4-flash` | OpenAI-compatible API, cheap and fast, grounded RAG answers |
+| **LLM (fallback)** | OpenRouter `nvidia/nemotron-3-ultra-550b-a55b:free` | Used when DeepSeek fails or times out |
+| **Embedding (primary)** | OpenAI text-embedding-3-small | 1536-dim, $0.02/M tokens, state-of-the-art retrieval quality |
+| **Embedding (fallback)** | OpenRouter `nvidia/llama-nemotron-embed-vl-1b-v2:free` | 2048-dim; used when OpenAI fails |
 | **Vector Search** | sqlite-vec | Zero-infrastructure, single .db file, native SQL queries |
 | **Semantic Chunking** | Custom parser | Respects sermon boundaries (ie not splitting across dates) |
 
+### Provider fallbacks & timeouts
+
+Every request tries the primary provider first and falls back on failure:
+
+- **Embeddings:** OpenAI (1536, `embedding_1536` table) -> OpenRouter (2048,
+  `embedding_2048` table). Providers with no API key set are skipped.
+- **Answers:** DeepSeek (`thinking` disabled) -> OpenRouter nemotron. Only the
+  DeepSeek payload carries the provider-specific `thinking` field.
+- **Transient retries:** each provider is tried up to 3 times with a short
+  backoff before falling through, since free providers (e.g. Nvidia upstream
+  "Service temporarily overloaded") fail transiently.
+- **Timeouts:** each provider call is bounded by `LLM_TIMEOUT_SECONDS` /
+  `EMBEDDING_TIMEOUT_SECONDS` (default 30s). A timeout counts as a failure and
+  triggers the next provider.
+- **Total budget:** the whole QA pipeline is capped by `QA_TIMEOUT_SECONDS`
+  (default 60s). If it is exceeded, the user gets an early friendly message instead of a silent hang; both
+  turns are recorded and the timeout is logged with the request id.
+- If every provider fails, the client gets a clear `AppError`; missing keys.
 ### Messaging
 
 | Platform | Library | Setup Complexity |
@@ -420,14 +440,28 @@ CREATE INDEX idx_sermons_topic_type ON sermons(topic_type);
 
 ### Virtual Table: `sermons_embeddings`
 
+The index is one vec0 table **per embedding dimension**, because the primary
+(OpenAI, 1536) and fallback (OpenRouter, 2048) models produce different-sized
+vectors. Each chunk is embedded with both providers at seed time so retrieval
+can fall back at query time when the primary provider fails.
+
 ```sql
--- sqlite-vec virtual table for vector similarity search
--- 1536 dimensions = OpenAI text-embedding-3-small output size
-CREATE VIRTUAL TABLE sermons_embeddings USING vec0(
-    chunk_id TEXT PRIMARY KEY,             -- FK to sermons.id
+-- sqlite-vec virtual tables for vector similarity search
+CREATE VIRTUAL TABLE chunks_embeddings_1536 USING vec0(
+    chunk_id TEXT PRIMARY KEY,             -- FK to chunks.id
     embedding FLOAT[1536] distance_metric=cosine
 );
+
+CREATE VIRTUAL TABLE chunks_embeddings_2048 USING vec0(
+    chunk_id TEXT PRIMARY KEY,
+    embedding FLOAT[2048] distance_metric=cosine
+);
 ```
+
+> **Migration:** the legacy single-table `chunks_embeddings` was replaced by the
+> per-dimension tables above. Run `uv run migrate.py` once to drop the old
+> table, then `uv run seed.py` to re-index. Migration is a one-time explicit
+> step - `init_db` never drops tables.
 
 ### Table: `chat_history`
 

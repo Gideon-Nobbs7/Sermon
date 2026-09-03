@@ -26,6 +26,7 @@ logger = logging.getLogger("app")
 _REQUIRED_KEYS = {
     "OPENAI_API_KEY": "embeddings",
     "LLM_API_KEY": "DeepSeek answers",
+    "OPENROUTER_API_KEY": "OpenRouter fallbacks",
     "TELEGRAM_BOT_TOKEN": "the Telegram bot",
     "TELEGRAM_WEBHOOK_SECRET": "Telegram webhook auth",
     "TELEGRAM_SECRET_HEADER": "Telegram webhook header",
@@ -53,7 +54,13 @@ def create_app(
                         purpose,
                     )
         conn = get_connection(db_path)
-        init_db(conn, dimensions=settings.EMBEDDING_DIMENSIONS)
+        init_db(
+            conn,
+            dimensions=(
+                settings.EMBEDDING_DIMENSIONS,
+                settings.OPENROUTER_EMBEDDING_DIMENSIONS,
+            ),
+        )
         conn.close()
         logger.info("db ready at %s", db_path or settings.SQLITE_DB_PATH)
         yield
@@ -69,13 +76,24 @@ def create_app(
             return response
 
     if qa is None:
+        primary_embed = OpenAIEmbeddingService(
+            api_key=settings.OPENAI_API_KEY,
+            model=settings.EMBEDDING_MODEL,
+            dimensions=settings.EMBEDDING_DIMENSIONS,
+        )
+        fallback_embed = OpenAIEmbeddingService(
+            api_key=settings.OPENROUTER_API_KEY,
+            model=settings.OPENROUTER_EMBEDDING_MODEL,
+            dimensions=settings.OPENROUTER_EMBEDDING_DIMENSIONS,
+            url=f"{settings.OPENROUTER_BASE_URL}/embeddings",
+            key_env="OPENROUTER_API_KEY",
+        )
         qa = QAService(
             retriever=Retriever(
-                OpenAIEmbeddingService(
-                    api_key=settings.OPENAI_API_KEY,
-                    model=settings.EMBEDDING_MODEL,
-                    dimensions=settings.EMBEDDING_DIMENSIONS,
-                )
+                [
+                    (primary_embed, settings.EMBEDDING_DIMENSIONS),
+                    (fallback_embed, settings.OPENROUTER_EMBEDDING_DIMENSIONS),
+                ]
             ),
             generator=Generator(),
             history=ChatHistoryStore(db_path=db_path),

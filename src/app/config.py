@@ -18,6 +18,16 @@ class Settings(BaseSettings):
     EMBEDDING_DIMENSIONS: int = 1536
     OPENAI_EMBEDDINGS_URL: str = "https://api.openai.com/v1/embeddings"
 
+    OPENROUTER_API_KEY: str = ""
+    OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
+    OPENROUTER_EMBEDDING_MODEL: str = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
+    OPENROUTER_EMBEDDING_DIMENSIONS: int = 2048
+    OPENROUTER_LLM_MODEL: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
+
+    LLM_TIMEOUT_SECONDS: float = 30.0
+    EMBEDDING_TIMEOUT_SECONDS: float = 30.0
+    QA_TIMEOUT_SECONDS: float = 60.0
+
     LLM_BASE_URL: str
     LLM_MODEL: str
     LLM_API_KEY: str = ""

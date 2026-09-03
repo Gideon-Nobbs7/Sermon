@@ -1,5 +1,19 @@
 # Changelog
 
+## Fallbacks & timeouts (3 Sept 2026)
+
+What this round added:
+
+- If the main answer model (DeepSeek) or the main embedding provider (OpenAI)
+  fails or takes too long, the bot now automatically falls back to free models
+  via OpenRouter - so a provider outage doesn't take the bot down.
+- To make the embedding fallback work, each sermon is now stored twice, once
+  per model size, and the bot picks whichever provider answered.
+- Every provider call has a time limit. If the whole question is taking too
+  long, the user hears back right away ("this is taking longer than expected")
+  instead of waiting forever.
+- Adding your OpenRouter API key is now also checked on startup.
+
 ## Scope 2 — The Question-Answering Bot (2 Sept 2026)
 
 What this round built:
