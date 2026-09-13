@@ -27,7 +27,9 @@ def _json_response(status_code: int, detail: str) -> JSONResponse:
 
 def register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppError)
-    async def handle_app_error(request: Request, exc: AppError) -> JSONResponse:
+    async def handle_app_error(
+        request: Request, exc: AppError
+    ) -> JSONResponse:
         logger.error("app error: %s", exc.error, exc_info=(type(exc), exc, exc.__traceback__))
         return _json_response(exc.status_code, exc.detail)
 
