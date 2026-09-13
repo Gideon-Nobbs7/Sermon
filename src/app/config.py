@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     TELEGRAM_WEBHOOK_SECRET: str = ""
     TELEGRAM_SECRET_HEADER: str = ""
 
+    WATCHER_DEBOUNCE_SECONDS: float = 2.0
+    WATCHER_POLL_INTERVAL: float = 1.0
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

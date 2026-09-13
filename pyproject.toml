@@ -19,6 +19,7 @@ dependencies = [
     "python-multipart>=0.0.9",
     "uvicorn>=0.30.0",
     "python-telegram-bot>=21.0",
+    "watchdog>=4.0.0",
 ]
 
 [dependency-groups]
