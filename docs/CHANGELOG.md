@@ -1,5 +1,14 @@
 # Changelog
 
+## Watcher worker (13 Sept 2026)
+
+What this round added:
+
+- A dedicated watcher worker that monitors the data folder for new or changed files and automatically triggers the embedding pipeline in the background.
+- On startup, the worker runs a full scan in a background thread so it never blocks or delays anything.
+- File changes are debounced — if a file is being saved in pieces, the worker waits for it to settle before processing.
+- The watcher runs as its own service, separate from the web server, so the two can be restarted independently.
+
 ## Fallbacks & timeouts (3 Sept 2026)
 
 What this round added:
