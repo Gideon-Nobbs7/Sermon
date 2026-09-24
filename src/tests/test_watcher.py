@@ -11,6 +11,7 @@ from src.app.workers.watcher import (
     collect_chunks,
     collect_chunks_for_file,
     index_chunks,
+    should_ignore,
     startup_scan,
 )
 
@@ -107,8 +108,9 @@ class TestIndexChunks:
                 text="Test sermon notes",
             )
         ]
-        inserted = index_chunks(conn, chunks, embed_services)
-        assert inserted >= 0
+        changed, embedded = index_chunks(conn, chunks, embed_services)
+        assert changed == 1
+        assert embedded >= 0
         total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
         assert total == 1
         conn.close()
@@ -130,10 +132,68 @@ class TestIndexChunks:
             text="Test sermon notes",
         )
         index_chunks(conn, [chunk], embed_services)
-        inserted = index_chunks(conn, [chunk], embed_services)
-        assert inserted == 0
+        changed, embedded = index_chunks(conn, [chunk], embed_services)
+        assert changed == 0
+        assert embedded == 0
         total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
         assert total == 1
+        conn.close()
+
+    def _make_chunk(self, id, text, **overrides):
+        kwargs = dict(
+            source_file="test.md",
+            date="2026-01-01",
+            speaker="Ps. Test",
+            topic_type="Rhema",
+            topic_title="Test Topic",
+            scriptures=["John 3:16"],
+            page=None,
+            text=text,
+        )
+        kwargs.update(overrides)
+        return MagicMock(
+            id=id,
+            source_type=MagicMock(value="sermon"),
+            **kwargs,
+        )
+
+    def test_intra_batch_duplicates_do_not_raise(self, db_path, embed_services):
+        from src.app.db.database import get_connection
+
+        conn = get_connection(db_path)
+        chunk = self._make_chunk("dup_in_batch", "same text")
+        changed, _ = index_chunks(conn, [chunk, chunk], embed_services)
+        assert changed == 1
+        total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
+        assert total == 1
+        conn.close()
+
+    def test_whitespace_only_change_is_not_an_update(self, db_path, embed_services):
+        from src.app.db.database import get_connection
+
+        conn = get_connection(db_path)
+        index_chunks(conn, [self._make_chunk("ws_1", "grace upon grace")], embed_services)
+        changed, embedded = index_chunks(
+            conn, [self._make_chunk("ws_1", "grace   upon\tgrace  ")], embed_services
+        )
+        assert changed == 0
+        assert embedded == 0
+        row = conn.execute("SELECT text FROM chunks WHERE id = 'ws_1'").fetchone()
+        assert row["text"] == "grace upon grace"
+        conn.close()
+
+    def test_real_change_updates_and_reembeds(self, db_path, embed_services):
+        from src.app.db.database import get_connection
+
+        conn = get_connection(db_path)
+        index_chunks(conn, [self._make_chunk("upd_1", "original notes")], embed_services)
+        changed, embedded = index_chunks(
+            conn, [self._make_chunk("upd_1", "rewritten notes on faith")], embed_services
+        )
+        assert changed == 1
+        assert embedded == 1
+        row = conn.execute("SELECT text FROM chunks WHERE id = 'upd_1'").fetchone()
+        assert row["text"] == "rewritten notes on faith"
         conn.close()
 
 
@@ -179,6 +239,44 @@ class TestSermonHandler:
         with patch.object(handler, "_debounce") as mock_debounce:
             handler.on_created(event)
             mock_debounce.assert_not_called()
+
+    def test_db_artifacts_never_schedule(self, embed_services, db_path):
+        handler = SermonHandler(
+            embed_services, db_path=db_path, debounce_seconds=0.05
+        )
+        with patch.object(handler, "_process") as mock_process:
+            for name in (
+                "sermons.db",
+                "sermons.db-wal",
+                "sermons.db-shm",
+                "sermons.db-journal",
+                "notes.tmp",
+                "notes.md~",
+                ".notes.swp",
+            ):
+                handler._debounce(f"/fake/data/{name}")
+            time.sleep(0.2)
+            mock_process.assert_not_called()
+
+
+class TestShouldIgnore:
+    @pytest.mark.parametrize(
+        "name,ignored",
+        [
+            ("sermons.db", True),
+            ("sermons.db-wal", True),
+            ("sermons.db-shm", True),
+            ("sermons.db-journal", True),
+            ("draft.tmp", True),
+            ("notes.md~", True),
+            ("notes.swp", True),
+            ("2026-Sermons.md", False),
+            ("talk.pdf", False),
+            ("handout.docx", False),
+        ],
+    )
+    def test_ignore_set(self, name, ignored):
+        assert should_ignore(f"/data/{name}") is ignored
 
 
 class TestStartupScan:

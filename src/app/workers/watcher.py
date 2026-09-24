@@ -10,12 +10,14 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import logging
+import re
 import signal
 import threading
 import time
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
@@ -32,6 +34,31 @@ from ..services.parser import SermonMarkdownParser
 logger = logging.getLogger("watcher")
 
 _EXTENSIONS = {".pdf", ".docx", ".doc"}
+
+# Files that must never trigger the embedding pipeline. The SQLite database
+# lives inside the watched DATA_DIR so its write-ahead-log sidecars would
+# otherwise schedule pointless and self-reinforcing parse attempts.
+_IGNORED_SUFFIXES = frozenset(
+    {".db", ".db-wal", ".db-shm", ".db-journal", ".tmp", ".swp", ".swx"}
+)
+_IGNORED_EXACT = frozenset({"thumbs.db", ".ds_store"})
+
+
+def should_ignore(path: str | Path) -> bool:
+    """True when a changed path is a DB artifact or temp file, not content."""
+    name = Path(path).name
+    lowered = name.lower()
+    if lowered in _IGNORED_EXACT or lowered.endswith("~"):
+        return True
+    suffixes = "".join(Path(lowered).suffixes[-2:])
+    if suffixes in _IGNORED_SUFFIXES:
+        return True
+    return Path(lowered).suffix in _IGNORED_SUFFIXES
+
+
+def _normalize(text: Optional[str]) -> str:
+    """Collapse whitespace so a stray space/tab never counts as an update."""
+    return re.sub(r"\s+", " ", (text or "").strip())
 
 
 def build_embed_services() -> List[tuple]:
@@ -89,19 +116,80 @@ def collect_chunks_for_file(file_path: Path) -> List[Chunk]:
     return []
 
 
-def index_chunks(conn, chunks: List[Chunk], embed_services: List[tuple]) -> int:
-    existing = {r["id"] for r in conn.execute("SELECT id FROM chunks")}
-    new = [c for c in chunks if c.id not in existing]
-    if new:
-        import json
+def _chunk_row(c: Chunk) -> tuple:
+    import json
 
+    return (
+        c.id,
+        c.source_type.value,
+        c.source_file,
+        c.date,
+        c.speaker,
+        c.topic_type,
+        c.topic_title,
+        json.dumps(c.scriptures) if c.scriptures else None,
+        c.page,
+        c.text,
+    )
+
+
+def _row_changed(row, c: Chunk) -> bool:
+    """True only when content really changed; stray spaces/tabs don't count."""
+    import json
+
+    try:
+        stored_scriptures = json.loads(row["scriptures"]) if row["scriptures"] else []
+    except (TypeError, ValueError):
+        stored_scriptures = []
+    return (
+        (row["source_file"] or "") != (c.source_file or "")
+        or (row["date"] or "") != (c.date or "")
+        or _normalize(row["speaker"]) != _normalize(c.speaker)
+        or _normalize(row["topic_type"]) != _normalize(c.topic_type)
+        or _normalize(row["topic_title"]) != _normalize(c.topic_title)
+        or (stored_scriptures or []) != (list(c.scriptures) if c.scriptures else [])
+        or (row["page"] if row["page"] is not None else None) != c.page
+        or _normalize(row["text"]) != _normalize(c.text)
+    )
+
+
+def index_chunks(
+    conn, chunks: List[Chunk], embed_services: List[tuple]
+) -> Tuple[int, int]:
+    """
+    Insert new chunks, update really-changed ones. Returns (changed, embedded).
+    """
+    # Collapse intra-batch duplicates (parser ids repeat per date block).
+    by_id: Dict[str, Chunk] = {}
+    for c in chunks:
+        by_id[c.id] = c
+    chunks = list(by_id.values())
+
+    existing = {
+        r["id"]: r
+        for r in conn.execute(
+            "SELECT id, source_file, date, speaker, topic_type, topic_title, "
+            "scriptures, page, text FROM chunks"
+        )
+    }
+    to_insert = [c for c in chunks if c.id not in existing]
+    to_update = [c for c in chunks if c.id in existing and _row_changed(existing[c.id], c)]
+
+    if to_insert:
         conn.executemany(
-            "INSERT INTO chunks (id, source_type, source_file, date, speaker, "
+            "INSERT OR IGNORE INTO chunks (id, source_type, source_file, date, speaker, "
             "topic_type, topic_title, scriptures, page, text) "
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [_chunk_row(c) for c in to_insert],
+        )
+
+    if to_update:
+        conn.executemany(
+            "UPDATE chunks SET source_type = ?, source_file = ?, date = ?, speaker = ?, "
+            "topic_type = ?, topic_title = ?, scriptures = ?, page = ?, text = ? "
+            "WHERE id = ?",
             [
                 (
-                    c.id,
                     c.source_type.value,
                     c.source_file,
                     c.date,
@@ -111,12 +199,25 @@ def index_chunks(conn, chunks: List[Chunk], embed_services: List[tuple]) -> int:
                     json.dumps(c.scriptures) if c.scriptures else None,
                     c.page,
                     c.text,
+                    c.id,
                 )
-                for c in new
+                for c in to_update
             ],
         )
 
+    changed = to_insert + to_update
+
     from ..db.database import embedding_table, serialize_embedding
+
+    # Re-embed new and updated chunks. Drop stale vectors first.
+    updated_ids = {c.id for c in to_update}
+    if updated_ids:
+        for _service, dim in embed_services:
+            table = embedding_table(dim)
+            conn.executemany(
+                f"DELETE FROM {table} WHERE chunk_id = ?",
+                [(cid,) for cid in updated_ids],
+            )
 
     indexed = 0
     for service, dim in embed_services:
@@ -131,11 +232,14 @@ def index_chunks(conn, chunks: List[Chunk], embed_services: List[tuple]) -> int:
             vectors = service.embed([c.text for c in missing])
         except Exception as exc:
             logger.warning(
-                "embedding provider %s failed during seed: %s", service.model, exc
+                "embedding provider %s failed during watch "
+                "(retries exhausted, falling back): %s",
+                service.model,
+                exc,
             )
             continue
         conn.executemany(
-            f"INSERT INTO {table} (chunk_id, embedding) VALUES (?, ?)",
+            f"INSERT OR IGNORE INTO {table} (chunk_id, embedding) VALUES (?, ?)",
             [
                 (c.id, serialize_embedding(v))
                 for c, v in zip(missing, vectors)
@@ -143,7 +247,7 @@ def index_chunks(conn, chunks: List[Chunk], embed_services: List[tuple]) -> int:
         )
         indexed += len(missing)
     conn.commit()
-    return indexed
+    return len(changed), indexed
 
 
 class SermonHandler(FileSystemEventHandler):
@@ -173,6 +277,9 @@ class SermonHandler(FileSystemEventHandler):
         self._debounce(event.src_path)
 
     def _debounce(self, path: str):
+        if should_ignore(path):
+            logger.debug("ignoring changed file: %s", Path(path).name)
+            return
         with self._lock:
             if path in self._timers:
                 self._timers[path].cancel()
@@ -184,6 +291,9 @@ class SermonHandler(FileSystemEventHandler):
 
     def _process(self, path: str):
         file_path = Path(path)
+        if should_ignore(path):
+            logger.debug("ignoring changed file: %s", file_path.name)
+            return
         if not file_path.is_file():
             return
 
@@ -195,16 +305,17 @@ class SermonHandler(FileSystemEventHandler):
             try:
                 chunks = collect_chunks_for_file(file_path)
                 if not chunks:
-                    logger.info("no chunks extracted from %s", file_path.name)
+                    logger.debug("no chunks extracted from %s", file_path.name)
                     return
                 conn = get_connection(self.db_path)
-                inserted = index_chunks(conn, chunks, self.embed_services)
+                changed, embedded = index_chunks(conn, chunks, self.embed_services)
                 conn.close()
                 logger.info(
-                    "indexed %s: chunks=%d new=%d",
+                    "indexed %s: chunks=%d changed=%d embedded=%d",
                     file_path.name,
                     len(chunks),
-                    inserted,
+                    changed,
+                    embedded,
                 )
             except Exception:
                 logger.exception("failed to process %s", file_path.name)
@@ -223,13 +334,14 @@ def startup_scan(
             data_dir = settings.DATA_DIR
             chunks = collect_chunks(sermon_file, data_dir)
             conn = get_connection(path)
-            inserted = index_chunks(conn, chunks, embed_services)
+            changed, embedded = index_chunks(conn, chunks, embed_services)
             total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
             conn.close()
             logger.info(
-                "startup scan complete: collected=%d new=%d total=%d",
+                "startup scan complete: collected=%d changed=%d embedded=%d total=%d",
                 len(chunks),
-                inserted,
+                changed,
+                embedded,
                 total,
             )
         except Exception:

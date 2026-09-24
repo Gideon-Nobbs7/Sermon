@@ -1,6 +1,7 @@
 """Seed/index the corpus from all ingestion sources (idempotent).
 
-Only chunks whose id is not already in `chunks` are embedded and inserted.
+New chunks are inserted and really-changed chunks are updated and re-embedded
+(whitespace-only differences are ignored). Safe to re-run.
 
     uv run seed.py                      # uses settings paths
     uv run seed.py --sermon-file 2026-Sermons.md
@@ -9,7 +10,6 @@ Only chunks whose id is not already in `chunks` are embedded and inserted.
 from __future__ import annotations
 
 import argparse
-import json
 import logging
 import os
 from pathlib import Path
@@ -19,16 +19,12 @@ from src.app.context import new_request_id, request_scope
 from src.app.logging import setup_logging
 
 from src.app.config import settings
-from src.app.db.database import (
-    embedding_table,
-    get_connection,
-    init_db,
-    serialize_embedding,
-)
+from src.app.db.database import get_connection, init_db
 from src.app.schemas.sermon import Chunk
 from src.app.services.embeddings import OpenAIEmbeddingService
 from src.app.services.loaders import load_document
 from src.app.services.parser import SermonMarkdownParser
+from src.app.workers.watcher import index_chunks
 
 logger = logging.getLogger("seed")
 
@@ -73,49 +69,6 @@ def collect_chunks(sermon_file: Path, data_dir: Path) -> List[Chunk]:
     return chunks
 
 
-def index_chunks(conn, chunks: List[Chunk], embed_services: List) -> int:
-    existing = {r["id"] for r in conn.execute("SELECT id FROM chunks")}
-    new = [c for c in chunks if c.id not in existing]
-    if new:
-        conn.executemany(
-            "INSERT INTO chunks (id, source_type, source_file, date, speaker, "
-            "topic_type, topic_title, scriptures, page, text) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-                (
-                    c.id, c.source_type.value, c.source_file, c.date, c.speaker,
-                    c.topic_type, c.topic_title,
-                    json.dumps(c.scriptures) if c.scriptures else None,
-                    c.page, c.text,
-                )
-                for c in new
-            ],
-        )
-
-    indexed = 0
-    for service, dim in embed_services:
-        table = embedding_table(dim)
-        embedded = {
-            r["chunk_id"]
-            for r in conn.execute(f"SELECT chunk_id FROM {table}")
-        }
-        missing = [c for c in chunks if c.id not in embedded]
-        if not missing:
-            continue
-        try:
-            vectors = service.embed([c.text for c in missing])
-        except Exception as exc:
-            logger.warning("embedding provider %s failed during seed: %s", service.model, exc)
-            continue
-        conn.executemany(
-            f"INSERT INTO {table} (chunk_id, embedding) VALUES (?, ?)",
-            [(c.id, serialize_embedding(v)) for c, v in zip(missing, vectors)],
-        )
-        indexed += len(missing)
-    conn.commit()
-    return indexed
-
-
 def main() -> None:
     setup_logging(settings.LOG_LEVEL)
     parser = argparse.ArgumentParser(description="Seed the sermon corpus")
@@ -139,10 +92,16 @@ def main() -> None:
                 settings.OPENROUTER_EMBEDDING_DIMENSIONS,
             ),
         )
-        inserted = index_chunks(conn, chunks, build_embed_services())
+        changed, embedded = index_chunks(conn, chunks, build_embed_services())
 
         total = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()["n"]
-        logger.info("collected=%d new=%d total=%d", len(chunks), inserted, total)
+        logger.info(
+            "collected=%d changed=%d embedded=%d total=%d",
+            len(chunks),
+            changed,
+            embedded,
+            total,
+        )
         conn.close()
 
 

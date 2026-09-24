@@ -603,8 +603,6 @@ that vibrates God's internals to fulfill your request.
 - Transformation is a mind beehaviour.
 - In the end you will know God’s will for you, which is good and pleasing and perfect. 
 
-https://youtube.com/playlist?list=PLWiQT7FWaG1jG8RQq1dFiSE7O-g9HQuYE&si=vcnVcteUMlM2bwm7
-
 #### Rhema: Ps. Richard - The Gift of God ####
 - Pro 18:16 - A man's gift makes room for him and brings him before great men
 - There are gift, gifts, man's gift, and gift of the church.
@@ -630,3 +628,108 @@ https://youtube.com/playlist?list=PLWiQT7FWaG1jG8RQq1dFiSE7O-g9HQuYE&si=vcnVcteU
    - Stir the gift of God in thee by putting on of hands by praying.
    - The gift becomes personalised when it has been stirred. It then needs an administration system around it to take it to the nations.
 
+
+#
+### 1st September, 2026 - Prayer and Thanksgiving Service ###
+#
+#### Exhortation: Ps. Gad ####
+- Anybody that does not have any relevance in God's kingdom has zero prayer life.
+- Col 1:9 - That ye may be filled with the knowledge of His will. It is very difficult to pray about God's purpose if you're not
+filled with the knowledge of God's will.
+- 1 Cor 6:12 - All things are lawful unto me but not all things are expedient - not all things will edify you.
+- Gen 3:8 - How was prayer birthed forth in the beginning? God made a man essentially a spirit so man is primarily a spirit.
+- The only aspect of your being that does what God wants is your spirit. 
+- Job 17:17-18 - What is man that thou should magnify him? And that thou should visit him every morning?
+- The Spirit of God used to come and go but after the death and resurrection of Jesus, a man is joined unto one Spirit.
+- The Spirit Himself will teach you everything but a man does not know the time of the Spirit's visitation.
+- Ps 16:8 - Every path you have to make is summed up in the Spirit. 
+- It takes divine alignment and inspiration on how to make choices and the inspiration to do this is lumped up in your Spirit.
+
+#### Rhema: Ps. Richard ####
+- Luke 24:39-43 - They tarried and praise and blesed God continually.
+- In the atmosphere of praise and prayer, a lot of miracles happen.
+- Acts 2:47 - Praising God, and having favour with all the people. And the Lord added to the church daily such as should be saved.
+- One of the ways to access praise if praise and prayer.
+- Songs of joy focuses on man and Praise focuses on God.
+
+
+#
+### 13th September, 2026 ###
+#
+#### Exhortation: Ps. Eugene ####
+- Jer 29:11 - It the thoughts of God to bring everyone into an expected end.
+- How can someone be against hope and be in hope? Hope means expectations.
+- There is a certain standard God works and most of at times, His standard is not compatible withn human's standard.
+- Our problem is keeping on to try our mechanism and forcing God to do same but God works with His own principles and mechanisms.
+- The expected end is for them that goes through the narrow gate with God(His mechanisms).
+- We are pressed on everyside but the Hope of God sustains us.
+- The righteous expectations shall never be cut short. The criteria is "the righteous - following the standards and ways of God".
+
+#### Rhema: Ps. Richard - The Gift of Love ####
+- Gal 5:22 - The fruit of the Spirit is love...
+- Every fruit comes out of a seed. What God gives a man is not a fruit but a seed.
+- Love at the seed stage does not attract anything. It only attracts when it grows to become a tree.
+- At the tree stage is where the devil will organise all manner of people around you in order to jeopardise your fruition.
+- God is love - meaning being full of love is exhibiting God, and this is what the devil hates.
+- What motivates you to do what you do? What drives you to do what you do?
+- Rom 5:5 - And hope maketh not ashamed; because the love of God is shed abroad in our hearts by the Holy Ghost which is given unto us.
+   - This means the Holy Ghost is the plantter and our heart is the field on which He planted the seed of love.
+   - Love is a gift because it is a seed planted in us.
+   - It is our responsibility for that love to fill our soul, body etc.
+   - Not everyone can love but we have all received the seed or gift of love by the Holy Ghost to love.
+- Love is a constant in filling of the spirit.
+- There is an expression of love from the mouth and heart. These two are different.
+- To affirm your love, you must pay the cost of any sacrifice.
+
+Features of Love
+- 1 Cor 13:4->7: Patient, Loyal, Never haugty, Kind, Not jealous, Never Boastful
+
+Kinds of Love
+1. Greater Love
+- Loving your neighbours - John 15:12-13. Looking at love in the spectrum of Jesus', where a man pays the cost to make others happy in the body of Christ.
+- Eph 5:2 - And walk in love, as Christ also hath loved us, and hath given himself for us.
+- You must walk in the sacrifice of money, prayer, fasting for your brother.
+- The cardinal x'tics of Greater Love is paying the cost. Exhibiting the fruits of love does not mean you are walking in Greater Love.
+- God is the 1st man that demonstrated it - John 3:16.
+- It is also called the love of God
+- Ps 50:5 - Anytime there is a covenant, there is a sacrifice.
+- Isa 62:6-7 - God has set His standard. He will never move until men sacrifice to be the praise of the earth.
+- How do you sacrifice? You will need the Holy Ghost to help you everyday through love. How do you develop this love? 2 Thess 3:5 - And the Lord direct your hearts into the love of God, and into the patient waiting for Christ. Meaning it is not your doing but the Lord directing your heart into His love. You can also pray to increase in love - 1 John 2:5
+
+
+
+#
+### 20th September, 2026 ###
+#
+#### Exhortation: Ps. Emmanuel - Being Unstoppable In Life ####
+- 2 Pet 1:3 - According as his divine power hath given unto us all things that pertain unto life and godliness.
+- Everything that pertains to life comes from the knowledge of him that hath called us to glory and virtue.
+- By His divine power, He has given us all things that pertain unto life and godliness.
+- Faith itself is a parameter of faith. So for you to always have the tender to transact success on earth is knowledge.
+- In the same way where in our kingdom, the asset to do business is knowledge - Being transformed with the renewal of our mind
+- Is 33:6 - And wisdom and knowledge shall be the stability of thy times, and strength of salvation: the fear of the Lord is his treasure. The perspective of life is how wide you can see with the eyes of your mind. Being immovable in life primarily depends on your vision.
+- Sometimes your prroblem is not ignorance but unable to unlearn to relearn.
+- Being unmovable in life is - seek knowledge, unlearn to relearn. As you walk with God, God gives you a new knowlede for a new movement.
+- A transformed mind is a transformed life.
+
+#### Rhema: Ps. Gad - The Dew of Hermon ####
+- Prayer is the lifeline of a believer. 
+- Gen 2:7 - And man became a living soul
+- 1 Cor 15:45 - The first man Adam was made a living soul but the last Adam was made a quickening spirit.
+- Q. Why was the last Adam made a quickening spirit but the first man Adam wasn't? Meaning the spirit aspect of man was that which was quickened.
+- Job 32:8 - But there is a spirit in man. - meaning a man has a spirit.
+- Every man's spirit has been activated but the capacity at which it will operate depends on the frequency or rate of in-filling by the believer. There are levels with capcity building.
+- Pro 25:28 - He that hath no rule over his own spirit is like a city that is broken down, and without walls.
+- The quickeneth of one's spirit builds a fortress around them. A man must continually fortify their spirit.
+- If a man fails in the days of adversity, his strength/spirit is small.
+- Col 2:15 - God disarmed the principalities and powers that were ranged against us. When you pray, pray from the standpoint of victory that the enemy has nothing against you. Jesus has given you the power over all your enemies but they are still lingering forces to buffet men.
+- Ps 110:3 - Thy people shall be willing in the day of thy power - A man is only willing when he has power. in the beauties of holiness from the womb of the morning: thou hast the dew of thy youth. - A man must start speaking, praying in their youth the things they want to see in the future because of 'womb of the morning'.
+- The morning has a womb. Just like how a woman travails in birth, God has done same for a man and He has placed every blessing in a man's spirit. In the womb of morning, God has filled a man's spirit with blessings but a man has to push(pray)
+first for it to come to pass.
+- Sometimes you have to wait to wait in prayer, tarry - Isa 66:8
+- All blessing God gives us must be good, acceptable and perfect will of God - Rom 12:2
+- Dont take counsel from your body, flesh, soul, emotions and thinkings but out of intuition, enquiring from God - Ps 13:2
+- Micah 5:7 - The dew of a man blessing does not wait nor tarry for a man. 
+- The morning which is pregnant with a man's blessing is not there forever and that explains why you must do it a an early age
+- Exod 16:13 - And in the morning the dew lay round about the host...the dew laid round about manna
+- Ps 133:3 - As the dew of Hermon, and as the dew that descended upon the mountains of Zion: for there the Lord commanded the blessing, even life for evermore.

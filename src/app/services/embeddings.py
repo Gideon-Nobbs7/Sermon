@@ -1,11 +1,53 @@
 from __future__ import annotations
 
+import asyncio
+import logging
+import random
+import time
 from typing import List, Optional, Protocol
 
 import httpx
 
 from ..config import settings
 from ..errors import AppError
+
+logger = logging.getLogger("embeddings")
+
+_MAX_RETRIES = 3
+_RETRY_BASE_SECONDS = 1.0
+_RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
+
+
+def _retry_delay(attempt: int, retry_after: Optional[float] = None) -> float:
+    """Exponential backoff with jitter"""
+    if retry_after is not None and retry_after >= 0:
+        return retry_after + random.uniform(0, 0.5)
+    return _RETRY_BASE_SECONDS * (2**attempt) + random.uniform(0, 0.5)
+
+
+def _retry_after_seconds(exc: httpx.HTTPStatusError) -> Optional[float]:
+    try:
+        value = exc.response.headers.get("retry-after")
+    except Exception:
+        return None
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _is_retryable(exc: Exception) -> bool:
+    if isinstance(exc, httpx.TimeoutException):
+        return True
+    if isinstance(exc, httpx.HTTPStatusError):
+        try:
+            status = exc.response.status_code
+        except Exception:
+            return False
+        return status in _RETRYABLE_STATUSES
+    return False
 
 
 class EmbeddingService(Protocol):
@@ -62,25 +104,75 @@ class OpenAIEmbeddingService:
 
     def embed(self, texts: List[str]) -> List[List[float]]:
         self._require_key()
-        resp = httpx.post(
-            self._url,
-            headers=self._headers(self._api_key),
-            json={"model": self.model, "input": texts},
-            timeout=self._timeout,
-        )
-        resp.raise_for_status()
-        return self._extract(resp.json())
+        last_exc: Optional[Exception] = None
+        for attempt in range(_MAX_RETRIES):
+            try:
+                resp = httpx.post(
+                    self._url,
+                    headers=self._headers(self._api_key),
+                    json={"model": self.model, "input": texts},
+                    timeout=self._timeout,
+                )
+                resp.raise_for_status()
+                return self._extract(resp.json())
+            except Exception as exc:  # noqa: BLE001
+                last_exc = exc
+                if not _is_retryable(exc) or attempt == _MAX_RETRIES - 1:
+                    raise
+                retry_after = (
+                    _retry_after_seconds(exc)
+                    if isinstance(exc, httpx.HTTPStatusError)
+                    else None
+                )
+                delay = _retry_delay(attempt, retry_after)
+                logger.warning(
+                    "embedding provider %s attempt %d/%d failed (%s), "
+                    "retrying in %.1fs",
+                    self.model,
+                    attempt + 1,
+                    _MAX_RETRIES,
+                    exc,
+                    delay,
+                )
+                time.sleep(delay)
+        assert last_exc is not None
+        raise last_exc
 
     async def aembed(self, texts: List[str]) -> List[List[float]]:
         self._require_key()
+        last_exc: Optional[Exception] = None
         async with httpx.AsyncClient(timeout=self._timeout) as client:
-            resp = await client.post(
-                self._url,
-                headers=self._headers(self._api_key),
-                json={"model": self.model, "input": texts},
-            )
-        resp.raise_for_status()
-        return self._extract(resp.json())
+            for attempt in range(_MAX_RETRIES):
+                try:
+                    resp = await client.post(
+                        self._url,
+                        headers=self._headers(self._api_key),
+                        json={"model": self.model, "input": texts},
+                    )
+                    resp.raise_for_status()
+                    return self._extract(resp.json())
+                except Exception as exc:  # noqa: BLE001
+                    last_exc = exc
+                    if not _is_retryable(exc) or attempt == _MAX_RETRIES - 1:
+                        raise
+                    retry_after = (
+                        _retry_after_seconds(exc)
+                        if isinstance(exc, httpx.HTTPStatusError)
+                        else None
+                    )
+                    delay = _retry_delay(attempt, retry_after)
+                    logger.warning(
+                        "embedding provider %s attempt %d/%d failed (%s), "
+                        "retrying in %.1fs",
+                        self.model,
+                        attempt + 1,
+                        _MAX_RETRIES,
+                        exc,
+                        delay,
+                    )
+                    await asyncio.sleep(delay)
+        assert last_exc is not None
+        raise last_exc
 
 
 class StubEmbeddingService:
