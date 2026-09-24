@@ -79,3 +79,18 @@ What this round fixed:
   count as an edit.
 - When the embedding service says "slow down" (rate limit), the bot
   now waits and retries a few times (jitter with exponential backoff) before switching to the backup provider, instead of giving up on the first try.
+
+## Scripture verses in answers (24 Sept 2026)
+
+What this round added:
+
+- Answers can now quote the actual Bible verse, not just the sermon
+  notes. The bot looks up every scripture the sermon mentions in a
+  built-in King James Bible and shows the short phrase that matters,
+  with the reference attached — no need to open a Bible to check.
+- Long passages are trimmed to the phrase that answers the question
+  (about a line), so replies stay short and readable.
+- If a verse can't be looked up for any reason, the answer still
+  works — it just gives the reference on its own instead of quoting.
+- The Bible is loaded once when the server starts and shared from
+  memory after that, so looking up verses adds no delay to questions.

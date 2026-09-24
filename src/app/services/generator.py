@@ -19,6 +19,24 @@ Answer based ONLY on the provided context. Be precise and concise.
 Always cite the sermon date and speaker in your answer.
 If the context does not contain enough information, say so.
 Do not make up or extrapolate beyond the given context.
+
+When you state what a scripture says, follow these rules:
+- Tie every key point to the scripture reference given in its context block.
+- Quote the shortest phrase from the provided verse text that carries the
+  point (about one line, never more than ~25 words), followed by the
+  reference in parentheses.
+- Quote ONLY wording that appears in the provided verse text or sermon
+  notes. Never reproduce verse wording from memory.
+- If a reference has no verse text provided, cite the bare reference
+  without quoting.
+
+Example:
+Provided verse text: (Psalms 133:3) As the dew of Hermon, and as the dew
+that descended upon the mountains of Zion: for there the LORD commanded
+the blessing, even life for evermore.
+Good: The morning carries the "dew", the commanded blessing: "there the
+LORD commanded the blessing, even life for evermore" (Psalms 133:3).
+Bad: quoting a whole paragraph, or quoting verse wording that was not provided.
 """
 
 
@@ -52,7 +70,11 @@ def default_providers() -> List[LLMProvider]:
     ]
 
 
-def build_user_message(chunks: List[Chunk], question: str) -> str:
+def build_user_message(
+    chunks: List[Chunk],
+    question: str,
+    verses: Optional[List[tuple]] = None,
+) -> str:
     blocks = "\n".join(
         f"<context>\n"
         f"Date: {c.date} | Speaker: {c.speaker} | Topic: {c.topic_title} | "
@@ -61,7 +83,16 @@ def build_user_message(chunks: List[Chunk], question: str) -> str:
         f"</context>"
         for c in chunks
     )
-    return f"Context:\n{blocks}\n\nQuestion:\n{question}"
+    message = f"Context:\n{blocks}"
+    if verses:
+        verse_blocks = "\n".join(
+            f"<verse>\n{ref}: {text}\n</verse>" for ref, text in verses
+        )
+        message += (
+            "\n\nVerses (exact KJV wording - quote from here, not from memory):\n"
+            f"{verse_blocks}"
+        )
+    return message + f"\n\nQuestion:\n{question}"
 
 
 class Generator:
@@ -85,10 +116,13 @@ class Generator:
         chunks: List[Chunk],
         question: str,
         history: Optional[List[dict]] = None,
+        verses: Optional[List[tuple]] = None,
     ) -> List[dict]:
         messages: List[dict] = [{"role": "system", "content": SYSTEM_PROMPT}]
         messages.extend(history or [])
-        messages.append({"role": "user", "content": build_user_message(chunks, question)})
+        messages.append(
+            {"role": "user", "content": build_user_message(chunks, question, verses)}
+        )
         return messages
 
     async def generate(
@@ -96,8 +130,9 @@ class Generator:
         chunks: List[Chunk],
         question: str,
         history: Optional[List[dict]] = None,
+        verses: Optional[List[tuple]] = None,
     ) -> str:
-        messages = self.build_messages(chunks, question, history)
+        messages = self.build_messages(chunks, question, history, verses)
         errors: List[Exception] = []
 
         for provider in self.providers:

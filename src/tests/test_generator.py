@@ -66,6 +66,29 @@ def test_build_user_message_delimiters_context():
     assert "<context>" in msg
     assert "Pro 18:14 - a strong spirit sustains." in msg
     assert msg.index("<context>") < msg.index("Question:")
+    assert "<verse>" not in msg
+
+
+def test_system_prompt_states_scripture_rules():
+    assert "Never reproduce verse wording from memory" in SYSTEM_PROMPT
+    assert "bare reference" in SYSTEM_PROMPT
+
+
+def test_build_user_message_includes_verses_block():
+    chunks = [_chunk("dew notes")]
+    verses = [("Psalms 133:3", "(Psalms 133:3) commanded the blessing")]
+    msg = build_user_message(chunks, "what blessing?", verses=verses)
+    assert "<verse>" in msg
+    assert "Psalms 133:3" in msg
+    assert "commanded the blessing" in msg
+    assert msg.index("<verse>") < msg.index("Question:")
+
+
+def test_build_messages_passes_verses_through():
+    chunks = [_chunk("dew notes")]
+    verses = [("Psalms 133:3", "commanded the blessing")]
+    messages = Generator().build_messages(chunks, "q?", verses=verses)
+    assert "commanded the blessing" in messages[-1]["content"]
 
 
 def test_injection_stays_inside_context_and_system_is_fixed():

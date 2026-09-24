@@ -159,6 +159,7 @@ venv.bak/
 
 # App data
 data/sermons.db
+data/kjv.json
 
 # Spyder project settings
 .spyderproject

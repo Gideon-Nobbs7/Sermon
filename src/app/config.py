@@ -41,6 +41,13 @@ class Settings(BaseSettings):
     WATCHER_DEBOUNCE_SECONDS: float = 2.0
     WATCHER_POLL_INTERVAL: float = 1.0
 
+    BIBLE_TRANSLATION: str = "KJV"
+    BIBLE_JSON_PATH: Path = Path("./data/kjv.json")
+    BIBLE_API_URL: str = "https://bible-api.com"
+    BIBLE_TIMEOUT_SECONDS: float = 10.0
+    BIBLE_MAX_REFS_PER_ANSWER: int = 8
+    BIBLE_MAX_VERSES_PER_REF: int = 4
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

@@ -27,12 +27,14 @@ class QAService:
         history: ChatHistoryStore,
         default_k: int = 5,
         timeout: Optional[float] = None,
+        bible=None,
     ):
         self.retriever = retriever
         self.generator = generator
         self.history = history
         self.default_k = default_k
         self.timeout = timeout if timeout is not None else settings.QA_TIMEOUT_SECONDS
+        self.bible = bible
 
     async def answer(self, session_id: str, question: str, k: Optional[int] = None) -> Answer:
         try:
@@ -53,9 +55,28 @@ class QAService:
             await self._record(session_id, question, _NOT_FOUND)
             return Answer(answer=_NOT_FOUND, sources=[])
 
-        answer_text = await self.generator.generate(chunks, question, history=turns)
+        verses = await self._resolve_verses(chunks)
+        answer_text = await self.generator.generate(chunks, question, history=turns, verses=verses)
         await self._record(session_id, question, answer_text)
         return Answer(answer=answer_text, sources=[_source(c) for c in chunks])
+
+    async def _resolve_verses(self, chunks: List[Chunk]) -> List[tuple]:
+        if self.bible is None:
+            return []
+        refs: List[str] = []
+        for chunk in chunks:
+            refs.extend(chunk.scriptures or [])
+        if not refs:
+            return []
+        try:
+            verses = await self.bible.aget_many(
+                refs, limit=settings.BIBLE_MAX_REFS_PER_ANSWER
+            )
+        except Exception as exc:
+            logger.warning("bible verse lookup failed, answering ref-only: %s", exc)
+            return []
+        logger.debug("resolved %d/%d scripture refs to verse text", len(verses), len(refs))
+        return verses
 
     @staticmethod
     def _retrieval_query(turns: List[dict], question: str) -> str:

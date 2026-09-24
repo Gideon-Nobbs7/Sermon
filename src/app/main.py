@@ -16,6 +16,7 @@ from .messaging.telegram import TelegramMessenger
 from .messaging.whatsapp import WhatsAppMessenger
 from .routers import query, telegram, whatsapp
 from .services.embeddings import OpenAIEmbeddingService
+from .services.bible import BibleVerseService, preload_bible_bundle
 from .services.generator import Generator
 from .services.history import ChatHistoryStore
 from .services.qa import QAService
@@ -63,6 +64,7 @@ def create_app(
         )
         conn.close()
         logger.info("db ready at %s", db_path or settings.SQLITE_DB_PATH)
+        preload_bible_bundle()
         yield
 
     app = FastAPI(title="Sermon QA Bot", lifespan=lifespan)
@@ -97,6 +99,7 @@ def create_app(
             ),
             generator=Generator(),
             history=ChatHistoryStore(db_path=db_path),
+            bible=BibleVerseService(db_path=db_path),
         )
     if telegram_messenger is None:
         telegram_messenger = TelegramMessenger(qa, bot_token=settings.TELEGRAM_BOT_TOKEN)

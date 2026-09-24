@@ -283,6 +283,9 @@ Answer based ONLY on the provided context. Be precise and concise.
 Always cite the sermon date and speaker in your answer.
 If the context does not contain enough information, say so.
 Do not make up or extrapolate beyond the given context.
+(+ scripture rules: tie each point to its reference, quote the shortest
+phrase from the provided verse text, never reproduce verse wording from
+memory, cite bare references when no verse text was provided.)
 
 Context:
 ---
@@ -296,6 +299,11 @@ Date: 2026-02-22
 Speaker: Ps. Richard
 Topic: The Spirit of Might 2
 ...
+
+Verses (exact KJV wording - quote from here, not from memory):
+<verse>
+Psalms 133:3: (Psalms 133:3) As the dew of Hermon, ... evermore.
+</verse>
 
 User Question:
 What did Pastor Richard say about the Spirit of Might?
@@ -479,6 +487,23 @@ CREATE TABLE chat_history (
 );
 
 CREATE INDEX idx_chat_history_chat ON chat_history(chat_id, id);
+```
+
+### Table: `bible_verses`
+
+Persistent cache for KJV verse text resolved by `BibleVerseService`
+(used to ground answers with exact scripture wording). Keyed by the
+canonical ref (`"Psalms 133:3"`, ranges as `"John 3:16-18"`); rows are
+written read-through on first lookup, so repeated questions never
+re-fetch. Created by `init_db` — no migration needed.
+
+```sql
+CREATE TABLE bible_verses (
+    ref         TEXT PRIMARY KEY,            -- e.g. "Psalms 133:3"
+    text        TEXT NOT NULL,               -- exact KJV wording
+    translation TEXT NOT NULL DEFAULT 'KJV',
+    fetched_at  TEXT DEFAULT (datetime('now'))
+);
 ```
 
 ### ER Diagram

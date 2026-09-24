@@ -98,10 +98,16 @@ Sermon notes are stored in a markdown file (`2026-Sermons.md`). A parser extract
    - `TELEGRAM_BOT_TOKEN`
    - `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` (for WhatsApp)
 
-3. **Seed the database** with existing sermons:
-   ```bash
-   python seed.py
-   ```
+3. **Download the verse bundle** (lets answers quote scripture directly):
+    ```bash
+    uv run download_kjv.py
+    ```
+    Skip this and verses are fetched from a free API on demand instead.
+
+4. **Seed the database** with existing sermons:
+    ```bash
+    python seed.py
+    ```
 
 4. **Run with Docker Compose** (recommended):
    ```bash

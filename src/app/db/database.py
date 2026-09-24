@@ -39,6 +39,13 @@ CREATE TABLE IF NOT EXISTS chat_history (
 );
 
 CREATE INDEX IF NOT EXISTS idx_chat_history_chat ON chat_history(chat_id, id);
+
+CREATE TABLE IF NOT EXISTS bible_verses (
+    ref         TEXT PRIMARY KEY,
+    text        TEXT NOT NULL,
+    translation TEXT NOT NULL DEFAULT 'KJV',
+    fetched_at  TEXT DEFAULT (datetime('now'))
+);
 """
 
 
