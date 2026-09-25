@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Changelog: Sermon QA Bot{% endblock %}
+{% block meta %}What changed in the Sermon QA bot, rendered from the project changelog.{% endblock %}
+{% block content %}
+<section class="wrap narrow">
+  <p class="kicker">Changelog</p>
+  <h1>What changed.</h1>
+  <p class="lede">Rendered live from <code>docs/CHANGELOG.md</code>, so this page never drifts from the repo.</p>
+  <article class="changelog">
+    {{ changelog_html | safe }}
+  </article>
+</section>
+{% endblock %}

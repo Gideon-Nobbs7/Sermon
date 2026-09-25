@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{% block meta %}Ask your church sermons anything. A grounded Q&A bot for Telegram and WhatsApp.{% endblock %}" />
+  <title>{% block title %}Sermon QA Bot{% endblock %}</title>
+  <link rel="stylesheet" href="/static/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Sermon QA Bot home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>Sermon QA</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="/">Overview</a></li>
+          <li><a href="/get-started">Get started</a></li>
+          <li><a href="/self-host">Self-host</a></li>
+          <li><a href="/changelog">Changelog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <nav aria-label="Footer">
+        <a href="/">Overview</a>
+        <a href="/get-started">Get started</a>
+        <a href="/self-host">Self-host</a>
+        <a href="/changelog">Changelog</a>
+      </nav>
+      <p>
+        <a href="/health">Health</a> ·
+        <a href="/docs">API docs</a>
+      </p>
+    </div>
+  </footer>
+  <script src="/static/site.js" defer></script>
+</body>
+</html>

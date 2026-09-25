@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from .config import settings
 from .context import new_request_id, request_scope
@@ -14,7 +16,7 @@ from .errors import register_exception_handlers
 from .logging import setup_logging
 from .messaging.telegram import TelegramMessenger
 from .messaging.whatsapp import WhatsAppMessenger
-from .routers import query, telegram, whatsapp
+from .routers import query, site, telegram, whatsapp
 from .services.embeddings import OpenAIEmbeddingService
 from .services.bible import BibleVerseService, preload_bible_bundle
 from .services.generator import Generator
@@ -113,6 +115,8 @@ def create_app(
     app.include_router(query.router)
     app.include_router(telegram.router)
     app.include_router(whatsapp.router)
+    app.include_router(site.router)
+    app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")), name="static")
 
     @app.get("/health")
     async def health():

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Self-host on a VPS: Sermon QA Bot{% endblock %}
+{% block meta %}Run the Sermon QA bot on any VPS with Docker or plain Python, plus TLS and webhooks.{% endblock %}
+{% block content %}
+<section class="wrap narrow">
+  <p class="kicker">Self-host</p>
+  <h1>One container on any VPS.</h1>
+  <p class="lede">You need a VPS with SSH access, a domain pointed at it, and either Docker or Python 3.12+. Pick the path that fits how you like to run things.</p>
+
+  <div class="tabs" role="tablist" aria-label="Deploy paths">
+    <button type="button" role="tab" aria-selected="true" aria-controls="panel-docker" id="tab-docker">Docker (recommended)</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="panel-bare" id="tab-bare" tabindex="-1">Bare metal</button>
+  </div>
+
+  <div id="panel-docker" role="tabpanel" aria-labelledby="tab-docker">
+    <h2>Docker path</h2>
+    <ol>
+      <li>Point your domain at the VPS and sign in over SSH.</li>
+      <li>Install Docker and the compose plugin.</li>
+      <li>Clone the repo and configure <code>.env</code> as on the <a href="/get-started">get-started page</a>.</li>
+      <li>Seed once, then start:
+        <div class="cmd"><pre><code>uv run seed.py
+docker compose up -d --build</code></pre><button type="button" data-copy>Copy</button></div>
+      </li>
+      <li>Put a reverse proxy (Caddy or nginx) in front for TLS and forward to <code>localhost:8000</code>. Keep <code>./data</code> and <code>.env</code> mounted so restarts lose nothing.</li>
+      <li>Adding sermons later is just uploading files: drop <code>.pdf</code> or <code>.docx</code> files into <code>./data</code> and the watcher embeds them with no restart.</li>
+    </ol>
+  </div>
+
+  <div id="panel-bare" role="tabpanel" aria-labelledby="tab-bare" hidden>
+    <h2>Bare-metal path</h2>
+    <ol>
+      <li>Install Python 3.12 and <code>uv</code> on the VPS.</li>
+      <li>Clone, configure <code>.env</code>, and seed:
+        <div class="cmd"><pre><code>uv sync
+uv run download_kjv.py
+uv run seed.py</code></pre><button type="button" data-copy>Copy</button></div>
+      </li>
+      <li>Run the web server:
+        <div class="cmd"><pre><code>uv run uvicorn src.app.main:app --host 0.0.0.0 --port 8000</code></pre><button type="button" data-copy>Copy</button></div>
+      </li>
+      <li>Run the watcher in a second process so new notes index themselves:
+        <div class="cmd"><pre><code>uv run python -m src.app.workers.watcher</code></pre><button type="button" data-copy>Copy</button></div>
+      </li>
+      <li>Keep both alive with systemd (two small units, <code>restart=always</code>), then terminate TLS with Caddy or nginx forwarding to port 8000.</li>
+      <li>New sermons are just files: drop <code>.pdf</code> or <code>.docx</code> into the data folder and the watcher embeds them automatically.</li>
+    </ol>
+  </div>
+
+  <h2>Connect Telegram</h2>
+  <div class="cmd"><pre><code>curl -X POST "https://api.telegram.org/bot&lt;BOT_TOKEN&gt;/setWebhook?url=https://&lt;domain&gt;/webhook/telegram&amp;secret_token=&lt;SECRET&gt;"</code></pre><button type="button" data-copy>Copy</button></div>
+
+  <h2>Confirm health</h2>
+  <div class="cmd"><pre><code>curl https://&lt;domain&gt;/health</code></pre><button type="button" data-copy>Copy</button></div>
+  <p>Expect <code>{"status": "ok", "db": "ok"}</code>. A 503 means the database file is missing or unreadable. Check the <code>./data</code> mount.</p>
+</section>
+{% endblock %}

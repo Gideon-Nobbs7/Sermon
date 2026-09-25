@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Get started: Sermon QA Bot{% endblock %}
+{% block meta %}Clone, add keys, seed, and run the Sermon QA bot locally or in Docker.{% endblock %}
+{% block content %}
+<section class="wrap narrow">
+  <p class="kicker">Get started</p>
+  <h1>From clone to first answer.</h1>
+  <p class="lede">Five steps. Copy each block, paste it in your terminal, move on.</p>
+
+  <h2>1. Clone and configure</h2>
+  <div class="cmd"><pre><code>git clone &lt;your-repo-url&gt; sermon
+cd sermon
+cp .env.example .env</code></pre><button type="button" data-copy>Copy</button></div>
+
+  <h2>2. Add your keys</h2>
+  <p>Open <code>.env</code> and fill in what you use. Start with embeddings and answers; add chat platforms when ready:</p>
+  <ul>
+    <li><code>OPENAI_API_KEY</code>: embeddings (primary)</li>
+    <li><code>LLM_BASE_URL</code>, <code>LLM_MODEL</code>, <code>LLM_API_KEY</code>: answers (primary)</li>
+    <li><code>OPENROUTER_API_KEY</code>: automatic fallback for both</li>
+    <li><code>TELEGRAM_BOT_TOKEN</code>, <code>TELEGRAM_WEBHOOK_SECRET</code>: Telegram later</li>
+  </ul>
+
+  <h2>3. Bundle the Bible text (optional, recommended)</h2>
+  <div class="cmd"><pre><code>uv run download_kjv.py</code></pre><button type="button" data-copy>Copy</button></div>
+  <p>Skip this and verses are fetched on demand instead.</p>
+
+  <h2>4. Add your sermons and index them</h2>
+  <p>No special format needed. Drop your sermon <code>.pdf</code> or <code>.docx</code> files into <code>data/</code>, then index everything:</p>
+  <div class="cmd"><pre><code>uv run seed.py</code></pre><button type="button" data-copy>Copy</button></div>
+  <p>This repo's own notes use an optional dated-markdown style (<code>data/2026-Sermons.md</code>, set via <code>SERMON_FILE_PATH</code>). If that file isn't there, it's simply skipped. Your PDFs and Word docs are indexed either way. Safe to re-run: known files are skipped, edited ones are updated.</p>
+
+  <h2>5. Run it</h2>
+  <div class="cmd"><pre><code>docker compose up -d</code></pre><button type="button" data-copy>Copy</button></div>
+  <p>Prefer bare Python?</p>
+  <div class="cmd"><pre><code>uvicorn src.app.main:app --reload</code></pre><button type="button" data-copy>Copy</button></div>
+
+  <h2>Check it works</h2>
+  <div class="cmd"><pre><code>curl localhost:8000/health
+curl -X POST localhost:8000/query -H 'Content-Type: application/json' -d '{"question": "What was taught on the Spirit of Might?"}'</code></pre><button type="button" data-copy>Copy</button></div>
+
+  <h2>6. Keep the watcher running</h2>
+  <p>Indexing stays automatic only while the watcher is up. In a second terminal, next to the server:</p>
+  <div class="cmd"><pre><code>uv run python -m src.app.workers.watcher</code></pre><button type="button" data-copy>Copy</button></div>
+  <p>Drop a PDF or Word doc into <code>data/</code> and it gets embedded with no restart. On a VPS both processes stay up under systemd or Docker (see <a href="/self-host">self-host</a>).</p>
+
+  <p>Going further: <a href="/self-host">run this on a VPS</a> with TLS and the Telegram webhook.</p>
+</section>
+{% endblock %}

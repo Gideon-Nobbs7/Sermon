@@ -94,3 +94,19 @@ What this round added:
   works — it just gives the reference on its own instead of quoting.
 - The Bible is loaded once when the server starts and shared from
   memory after that, so looking up verses adds no delay to questions.
+
+## Showcase website (25 Sept 2026)
+
+What this round added:
+
+- The bot now comes with its own website, served from the same app,
+  so there is still only one thing to run on your server.
+- The home page explains what the bot does and shows what a real
+  answer looks like, with dates, speakers, and a quoted verse.
+- A step-by-step setup page takes you from a fresh copy to your
+  first answer, with commands you can copy and paste.
+- A self-hosting page walks through putting it on a VPS two ways:
+  the easy Docker route or plain Python, plus connecting Telegram
+  and checking everything is healthy.
+- The changelog page on the site reads this very file, so the
+  website's history never falls behind the project.
