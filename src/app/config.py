@@ -22,7 +22,8 @@ class Settings(BaseSettings):
     OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
     OPENROUTER_EMBEDDING_MODEL: str = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
     OPENROUTER_EMBEDDING_DIMENSIONS: int = 2048
-    OPENROUTER_LLM_MODEL: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
+    OPENROUTER_LLM_MODEL: str = "nvidia/nemotron-3.5-lightning:free"
+    OPENROUTER_LLM_MODEL_FALLBACK: str = "qwen/qwen3-next-80b-a3b-instruct:free"
 
     LLM_TIMEOUT_SECONDS: float = 30.0
     EMBEDDING_TIMEOUT_SECONDS: float = 30.0

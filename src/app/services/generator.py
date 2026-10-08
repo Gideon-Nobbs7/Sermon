@@ -51,7 +51,7 @@ class LLMProvider:
 
 
 def default_providers() -> List[LLMProvider]:
-    return [
+    providers = [
         LLMProvider(
             name="deepseek",
             base_url=settings.LLM_BASE_URL,
@@ -61,13 +61,24 @@ def default_providers() -> List[LLMProvider]:
             extra_body={"thinking": {"type": "disabled"}},
         ),
         LLMProvider(
-            name="openrouter",
+            name="openrouter-lightning",
             base_url=settings.OPENROUTER_BASE_URL,
             api_key=settings.OPENROUTER_API_KEY,
             model=settings.OPENROUTER_LLM_MODEL,
             key_env="OPENROUTER_API_KEY",
         ),
     ]
+    if settings.OPENROUTER_LLM_MODEL_FALLBACK:
+        providers.append(
+            LLMProvider(
+                name="openrouter-qwen",
+                base_url=settings.OPENROUTER_BASE_URL,
+                api_key=settings.OPENROUTER_API_KEY,
+                model=settings.OPENROUTER_LLM_MODEL_FALLBACK,
+                key_env="OPENROUTER_API_KEY",
+            )
+        )
+    return providers
 
 
 def build_user_message(
@@ -98,7 +109,7 @@ def build_user_message(
 class Generator:
     """Answers grounded in retrieved chunks via one of several LLM providers.
 
-    DeepSeek is tried first and OpenRouter is the fallback.
+    DeepSeek is tried first, then OpenRouter Lightning, then OpenRouter Qwen.
     """
 
     def __init__(

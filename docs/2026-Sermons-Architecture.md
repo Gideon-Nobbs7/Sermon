@@ -132,7 +132,8 @@ An intelligent **Sermon Question-Answering Bot** deployed on **Telegram** or **W
 | Component | Technology | Justification |
 |---|---|---|
 | **LLM (primary)** | DeepSeek `deepseek-v4-flash` | OpenAI-compatible API, cheap and fast, grounded RAG answers |
-| **LLM (fallback)** | OpenRouter `nvidia/nemotron-3-ultra-550b-a55b:free` | Used when DeepSeek fails or times out |
+| **LLM (fallback 1)** | OpenRouter `nvidia/nemotron-3.5-lightning:free` | Fast high-throughput model, tried when DeepSeek fails or times out |
+| **LLM (fallback 2)** | OpenRouter `qwen/qwen3-next-80b-a3b-instruct:free` | Stable instruction-following model, tried when Lightning fails |
 | **Embedding (primary)** | OpenAI text-embedding-3-small | 1536-dim, $0.02/M tokens, state-of-the-art retrieval quality |
 | **Embedding (fallback)** | OpenRouter `nvidia/llama-nemotron-embed-vl-1b-v2:free` | 2048-dim; used when OpenAI fails |
 | **Vector Search** | sqlite-vec | Zero-infrastructure, single .db file, native SQL queries |
@@ -144,7 +145,8 @@ Every request tries the primary provider first and falls back on failure:
 
 - **Embeddings:** OpenAI (1536, `embedding_1536` table) -> OpenRouter (2048,
   `embedding_2048` table). Providers with no API key set are skipped.
-- **Answers:** DeepSeek (`thinking` disabled) -> OpenRouter nemotron. Only the
+- **Answers:** DeepSeek (`thinking` disabled) -> OpenRouter Lightning ->
+  OpenRouter Qwen. Only the
   DeepSeek payload carries the provider-specific `thinking` field.
 - **Transient retries:** each provider is tried up to 3 times with a short
   backoff before falling through, since free providers (e.g. Nvidia upstream

@@ -40,12 +40,12 @@ body {
 }
 .header-inner {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding-block: 0.75rem;
+  gap: 0.5rem 1rem; padding-block: 0.75rem; flex-wrap: wrap;
 }
-.brand { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--ink); text-decoration: none; white-space: nowrap; }
 .brand-mark { color: var(--accent); }
-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; list-style: none; margin: 0; padding: 0; }
-nav a { color: var(--muted); text-decoration: none; padding: 0.4rem 0.2rem; border-radius: 6px; }
+nav ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; list-style: none; margin: 0; padding: 0; }
+nav a { display: inline-block; color: var(--muted); text-decoration: none; padding: 0.5rem 0.3rem; border-radius: 6px; }
 nav a:hover, nav a:focus-visible { color: var(--ink); text-decoration: underline; }
 a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 3px solid var(--accent); outline-offset: 2px;
@@ -80,13 +80,14 @@ p, li { max-width: var(--measure); }
 .cards span { color: var(--muted); }
 
 .cmd {
-  position: relative; background: var(--code-bg); color: var(--code-ink);
+  background: var(--code-bg); color: var(--code-ink);
   border-radius: var(--radius); margin: 1rem 0; overflow: hidden;
+  display: grid;
 }
-.cmd pre { margin: 0; padding: 1rem 4.5rem 1rem 1rem; overflow-x: auto; }
+.cmd pre { margin: 0; padding: 0.25rem 1rem 1rem; overflow-x: auto; }
 .cmd code { font-family: ui-monospace, "Cascadia Mono", Menlo, monospace; font-size: 0.9rem; }
 .cmd button {
-  position: absolute; top: 0.6rem; right: 0.6rem;
+  justify-self: end; margin: 0.6rem 0.6rem 0;
   background: transparent; color: var(--code-ink);
   border: 1px solid currentColor; border-radius: 8px; padding: 0.3rem 0.7rem; cursor: pointer;
 }

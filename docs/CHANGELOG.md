@@ -95,6 +95,17 @@ What this round added:
 - The Bible is loaded once when the server starts and shared from
   memory after that, so looking up verses adds no delay to questions.
 
+## Backup answer models (6 Oct 2026)
+
+What this round added:
+
+- The bot now has two backup answer models instead of one. If the main
+  model is down, it tries a fast model first, then a second steady one
+  — so you're less likely to see an error when the free services are
+  busy.
+- Nothing about your sermons or saved answers changed. This only affects
+  which service writes the reply when the main one can't.
+
 ## Showcase website (25 Sept 2026)
 
 What this round added:

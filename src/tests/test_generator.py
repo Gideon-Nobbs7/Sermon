@@ -223,3 +223,51 @@ def test_error_body_raises_clean_app_error_when_last_provider(monkeypatch):
     gen = Generator(providers=_providers())
     with pytest.raises(AppError, match="reported an error"):
         asyncio.run(gen.generate([_chunk("note")], "q"))
+
+
+def test_falls_through_lightning_to_qwen(monkeypatch):
+    captured = {}
+
+    def _entry(name, model):
+        return LLMProvider(
+            name=name,
+            base_url=OPENROUTER_URL,
+            api_key="sk-or",
+            model=model,
+            key_env="OPENROUTER_API_KEY",
+        )
+
+    async def fake_post(self, url, headers, json):
+        if json["model"] == "nvidia/nemotron-3.5-lightning:free":
+            return _fake_error_response()
+        captured["model"] = json["model"]
+        return _fake_response("qwen fallback answer")
+
+    monkeypatch.setattr(httpx.AsyncClient, "post", fake_post)
+
+    gen = Generator(
+        providers=[
+            _entry("openrouter-lightning", "nvidia/nemotron-3.5-lightning:free"),
+            _entry("openrouter-qwen", "qwen/qwen3-next-80b-a3b-instruct:free"),
+        ],
+        retries=1,
+    )
+    answer = asyncio.run(gen.generate([_chunk("note")], "q"))
+
+    assert answer == "qwen fallback answer"
+    assert captured["model"] == "qwen/qwen3-next-80b-a3b-instruct:free"
+
+
+def test_default_providers_prefers_lightning_then_qwen(monkeypatch):
+    from src.app import config
+    from src.app.services.generator import default_providers
+
+    monkeypatch.setattr(config.settings, "OPENROUTER_LLM_MODEL", "nvidia/nemotron-3.5-lightning:free")
+    monkeypatch.setattr(
+        config.settings,
+        "OPENROUTER_LLM_MODEL_FALLBACK",
+        "qwen/qwen3-next-80b-a3b-instruct:free",
+    )
+    models = [p.model for p in default_providers() if p.name.startswith("openrouter")]
+    assert models[0] == "nvidia/nemotron-3.5-lightning:free"
+    assert "qwen/qwen3-next-80b-a3b-instruct:free" in models

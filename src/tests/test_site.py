@@ -45,5 +45,6 @@ def test_static_assets_served(tmp_path):
         js = client.get("/static/site.js")
     assert css.status_code == 200
     assert ":root" in css.text
+    assert "white-space: nowrap" in css.text  # brand never splits across lines
     assert js.status_code == 200
     assert "clipboard" in js.text
