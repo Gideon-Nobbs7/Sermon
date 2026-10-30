@@ -151,3 +151,9 @@ What this round changed:
 
 - Questions about last week's teaching now use sermons from that week instead
   of older passages that happen to sound similar.
+- The bot now tells the answer writer which dates it means by "last week."
+
+## Sermon section headings (30 Oct 2026)
+
+- Added closing markers to the sermon sections so each teaching is kept with
+  its speaker and topic when the notes are read.

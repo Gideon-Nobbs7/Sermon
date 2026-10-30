@@ -20,6 +20,7 @@ Answer based ONLY on the provided context. Be precise and concise.
 Always cite the sermon date and speaker in your answer.
 If the context does not contain enough information, say so.
 Do not make up or extrapolate beyond the given context.
+Use any resolved date range in the question to interpret relative time phrases.
 
 Formatting:
 - Use plain text only. Do not use Markdown or asterisks for emphasis, lists, or headings.

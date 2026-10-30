@@ -32,10 +32,12 @@ class FakeGenerator:
     def __init__(self):
         self.seen_verses = None
         self.seen_history = None
+        self.seen_question = None
 
     async def generate(self, chunks, question, history=None, verses=None):
         self.seen_verses = verses
         self.seen_history = history
+        self.seen_question = question
         return "answer"
 
 
@@ -123,6 +125,10 @@ def test_last_week_question_retrieves_previous_calendar_week_without_history(
     assert retriever.date_range == (date(2026, 10, 19), date(2026, 10, 26))
     assert result.sources[0]["date"] == "2026-10-25"
     assert generator.seen_history == []
+    assert generator.seen_question == (
+        "what was taught last week?\n\n"
+        "Resolved date range: 2026-10-19 through 2026-10-25 (inclusive)."
+    )
 
 
 def test_verses_resolve_and_reach_generator(tmp_path):

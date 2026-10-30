@@ -338,7 +338,8 @@ What did Pastor Richard say about the Spirit of Might?
 Questions containing "last week" or "previous week" use the previous
 Monday-to-Monday calendar window. Sermons in that date range are selected from
 SQLite before answer generation, without semantic ranking or prior chat history.
-Other questions continue to use vector similarity search.
+The resolved dates are included with the question so the model can interpret the
+relative phrase. Other questions continue to use vector similarity search.
 
 ---
 

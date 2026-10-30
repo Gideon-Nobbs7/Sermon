@@ -52,9 +52,15 @@ class QAService:
     async def _answer(self, session_id: str, question: str, k: Optional[int]) -> Answer:
         turns = await self.history.recent(session_id)
         date_range = _relative_date_range(question, date.today())
+        generation_question = question
         if date_range:
-            chunks = await self.retriever.retrieve_date_range(*date_range)
+            start, end = date_range
+            chunks = await self.retriever.retrieve_date_range(start, end)
             history = []
+            generation_question = (
+                f"{question}\n\nResolved date range: {start.isoformat()} through "
+                f"{(end - timedelta(days=1)).isoformat()} (inclusive)."
+            )
         else:
             query = self._retrieval_query(turns, question)
             chunks = await self.retriever.retrieve(query, k or self.default_k)
@@ -65,7 +71,7 @@ class QAService:
 
         verses = await self._resolve_verses(chunks)
         answer_text = await self.generator.generate(
-            chunks, question, history=history, verses=verses
+            chunks, generation_question, history=history, verses=verses
         )
         await self._record(session_id, question, answer_text)
         return Answer(answer=answer_text, sources=[_source(c) for c in chunks])

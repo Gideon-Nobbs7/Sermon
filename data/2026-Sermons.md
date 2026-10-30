@@ -1,6 +1,6 @@
 ### 8th Feb, 2026 ###
 
-#### Exhortation: Ps. Derrick - The Spirit of Excellence
+#### Exhortation: Ps. Derrick - The Spirit of Excellence ####
 
 - The spirit of excellence sets a man above his fellows. Daniel 3:1 - He was set above the princes because
   an excellent spirit was in him.
@@ -9,7 +9,7 @@
   - Speak in tongues regularly to activate you. The productive way is praying and your mind is focused on the spirit of excellence.
   - Josh 1:8 - This book of the law shall be in your mind and your ways is prosperous. The saturation point of confession is believing all that you'd say will come to pass.
 
-#### Rhema: Ps. Richard - The Need To Keep Your Spirit Sharp
+#### Rhema: Ps. Richard - The Need To Keep Your Spirit Sharp ####
 
 - Many of the crisis believers go through is they remain certain works belong to pastors, but the walk of our faith is not only for pastors rather all believers.
 - You are set on a journey to always get results when you make up your mind to go to church.
@@ -26,12 +26,12 @@ Hind feet and set me upon a high end
 
 ### 15th Feb, 2026 ###
 
-#### MOE: Elder Elvis
+#### MOE: Elder Elvis ####
 
 - Is 66:8 - For as soon as Zion travailed, she brought forth her children.
 - 2 Cor 3:18 - But we all, with open face beholding as in a glass the glory of the Lord, are changed into the same image from glory to glory, even as by the Spirit of the Lord.
 
-#### Exhortation: Ps. Solomon - Redeeming The Time
+#### Exhortation: Ps. Solomon - Redeeming The Time ####
 
 - Eph 5:15-16 - Walk carefully, live life with honour, purpose, and courage; shunning those who tolerate and enable evil, unwise, making the most of your time because the days are evil.
 - The mindset of God is autocratic and cannot be changed. The democratic are the wishes of God.
@@ -44,7 +44,7 @@ Hind feet and set me upon a high end
 - Walk in wisdom
 - Avoid procastination
 
-#### Rhema: Ps. Richard - The Spirit of Might 1
+#### Rhema: Ps. Richard - The Spirit of Might 1 ####
 
 - Philemon 1:4-6 - Hearing of thy faith and love, that thy communication will become effectual by acknowledging of every good thing which is in you. Paul emphasised on this that his fellowship, communication of his faith will become effectual. Our unity with the Spirit of the Lord might become effective.
   - Q. You can be christian and you do not understand why you don't have energy for anything
@@ -87,7 +87,7 @@ The Lord can be closer to you but your spirit is weak.  Eph 6:10 - Finally, my b
 
 ### 22nd Feb, 2026 ###
 
-#### Exhortation: Ps. Albert -
+#### Exhortation: Ps. Albert - ####
 
 Let the peace of God direct, rule your ways. Life is not stress lived when you have the peace of God in your life. God wants you to have peace
 where in the midst of troubles, afflictions, you are not bothered.
@@ -101,7 +101,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - John 14:27 - Peace I live with you not as the world give but I give and let not your heart be afraid.
 - Prayer, Knowing your identity
 
-#### Rhema: Ps. Richard - The Spirit of Might 2
+#### Rhema: Ps. Richard - The Spirit of Might 2 ####
 
 - Rev 3 - These things saith he that hath the seven Spirits of God, and the seven stars. It is the same Holy Ghost dividing Himself into 7 different offices according to Isa 11:1-3.
 - When man dies and appear before His maker, one of the questions he will be asked is: To what extent did he use his spirit.
@@ -115,7 +115,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 1st Mar, 2026 ###
 
-#### Rhema: Ps. Richard - The Spirit of Might: Atmosphere of Miracles
+#### Rhema: Ps. Richard - The Spirit of Might: Atmosphere of Miracles ####
 
 - 1 Cor 15:23 - Fruit bearing is the foundation of men's blessings.
 - Rom 16:5 - Epanaetus is the firstfruits unto Christ.
@@ -128,21 +128,21 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 8th Mar, 2026 ###
 
-#### Rhema: Ps. Richard - The Spirit of Might: Atmosphere of Miracles
+#### Rhema: Ps. Richard - The Spirit of Might: Atmosphere of Miracles ####
 
 - Acknowledge God for His dignity
 - Honor His name and who He is: Great God of the universe, reigns the cherubs, omnipotent God, I am that I am. Praise be to God and His holy name.
 
 ### 15th Mar, 2026 ###
 
-#### MOE: Elder Janet
+#### MOE: Elder Janet ####
 
 - Strength
 - Empowerment
 - Mercy in our evangelism mission
 - Spirit of power and might, counsel and judgment
 
-#### Exhortation: Pastor Emma: The Need To Be Spiritual
+#### Exhortation: Pastor Emma: The Need To Be Spiritual ####
 
 - The Holy Spirit has been given to us as an advantage. Unbelievers will do normal things but believers have not been called
   to do normal thinggs but extraordinary and we can only do this when we have been called - through the Holy Spirit.
@@ -153,7 +153,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - How to become sensitive to God? Walking in the spirit by praying regularly
 - Ps 119:18-19 - Open thou my eyes that I may behold wonderous things and hide not thy commandment from me.
 
-#### Rhema: Ps. Richard - How To Get God's Attention
+#### Rhema: Ps. Richard - How To Get God's Attention ####
 
 - John 16:24 - Have you asked nothing in my name: ask and ye shall receive, that your joy may be full.
 - James 4:3 - And when you ask you do not receive because your whole aim is your own pleasures. The problem is we ask with the wrong
@@ -172,7 +172,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 29th Mar, 2026 ###
 
-#### Rhema: Ps. Richard - The Holy Ghost Baptism
+#### Rhema: Ps. Richard - The Holy Ghost Baptism ####
 
 - 2 Pet 1:4 - It has been given to us great and precious promises that by these ye might be partakers of the divine nature.
 - It is not enogh to know who you are in Christ but you must also know what you can do in Christ.
@@ -192,7 +192,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 5th Apr, 2026 - Praying For The Nation Ghana ###
 
-#### Ps. Solomon
+#### Ps. Solomon ####
 
 - Binding the spirit of negligence in our health sectors
 - Heal the land of Ghana:
@@ -202,7 +202,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 3. Is 24:5 - The land is defiled because they have transgressed the laws
 4. Lev 18:25 - The land is defiled: therefore I do visit the iniquity thereof
 
-#### Ps. Derrick - Leaders in Ghana
+#### Ps. Derrick - Leaders in Ghana ####
 
 - The Spirit of Unity to rest upon our leaders - Matth 18:19
 - Gen 11:5-6 - The people have the spirit of oneness and nothing will be restrained from them.
@@ -210,12 +210,12 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Ps 61:6-7 - Increase the days of the kings life, preserve his years for many for many generations.
 - Divine wisdom - Pro 8:15 - By me kings reign, and princes decree justice
 
-#### Ps. Gad - Mercies of God
+#### Ps. Gad - Mercies of God ####
 
 - Matth 6:33 - Seek ye first the kingdom of God and his righteousness. Righteousness is everything that has to do with God.
 - Rev 11:15 - The kingdoms of this world have become the kingdoms of our Lord.
 
-#### Ps. Richard - The Praise of God
+#### Ps. Richard - The Praise of God ####
 
 - Ps 117:1 - Praise the Lord, all ye nations: praise him, all ye people.
 - Is 12:4-5 - Praise the Lord, call upon His name, declare His doings among the people
@@ -232,14 +232,14 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 12th Apr, 2026 ###
 
-#### Exhortation: Pastor Edmond
+#### Exhortation: Pastor Edmond ####
 
 - Matth 6:33 - Seek ye first the kingdom of God and His righteousness; and all these things shall be added unto you. Not everything good is from God.
 - Matth 7:21 - Depart from me ye that work iniquity. The end question will always be where are the results of what you were sent for?
 - You are not born again to do try and error with life. You get the chance to enter into the chambers of destiny to know what you are supposed to do exactly. If God indeed brought you here for a purpose then there is a task on your head to accomplish.
 - It is high time you visit the home of your creation where the canvas of your desttiny will be revealed unto you.
 
-#### Rhema: Ps. Richard - Cont'd On The Doctrine Of Baptism
+#### Rhema: Ps. Richard - Cont'd On The Doctrine Of Baptism ####
 
 - Doctrine defines a framework which defines a people beyond what has to be done. It is about a people which defines a people and their way of life.
 - Baptism - Greek(Baptiso) means to be submerged, overwhelmed, dipped into. Baptism is beyond water.
@@ -260,12 +260,12 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 19th Apr, 2026 ###
 
-#### MOE: Pastor Albert
+#### MOE: Pastor Albert ####
 
 - The bible speaks of the fact that men should be filled with the Holy Ghost. There is a void in man and only the Spirit of Lord can fill this void. One advantage of being filled with the Spirit of God is your words becomee potent.
 - Matth 8:16 - Jesus healed them with His word. This is one of the advantage a man filled with the Spirit gets. The effectual fervent prayer of a righteous avails much.
 
-#### Exhortation: Pastor Aba - Loving Jesus Sincerely
+#### Exhortation: Pastor Aba - Loving Jesus Sincerely ####
 
 - 1Cor 13:13 - Now abides faith, hope, love and the greatest of this is love. Nothing can separate us from the love of God.
   In your actions, can you boldly say you love Jesus sincerely?
@@ -273,7 +273,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Matth 22::37 - Thou shall love the the Lord thy God with all thy heart, soul and mind. What do you think about at your leisure time.
 - John 21:15 - Feeed my sheep if you love me. The love of God is expressed through feeding the sheep.
 
-#### Rhema: Ps. Richard - QnA On The Doctrine Of Baptism
+#### Rhema: Ps. Richard - QnA On The Doctrine Of Baptism ####
 
 - John 3:1-5 - Jesus said verily verily unless a man is born again, he cannot see the kingdom of God. Can a man be born again and enter into his mother's womb? v5: Except a man is born of water and of the Spirit, he cannot enter the kingdom of God.
 - Born is a seed:
@@ -293,7 +293,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 26th Apr, 2026 - Praise and Prophetic Service ###
 
-#### MOE: Pastor Emma
+#### MOE: Pastor Emma ####
 
 - Enter into His gates with thanksgiving and into His courts with praise.
 - Jude 1:20 - Building up yourself in your most holy faith, praying in the Holy Ghost.
@@ -302,12 +302,12 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 3rd May, 2026 - PFTNG ###
 
-#### MOE: Pastor Derrick
+#### MOE: Pastor Derrick ####
 
 - Due 28:12 - The Lord shall open unto thee His good treasure, the heaven to give unto thy land rain in his season, and to bless all the work of thine hand.
 - Ps 90:17 - Let the beauty of the Lord our God be upon us and establish the work of our hands upon us, the work of our hands establish thou it.
 
-#### MOE: Pastor Samuel
+#### MOE: Pastor Samuel ####
 
 - Ps 24:1 - The earth is the Lord', and the fulness thereof.
 - Deu 11:12 - The land the Lord cares for, His eyes are always upon it from beginning to the end of the year.
@@ -318,11 +318,11 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 10th May, 2026 ###
 
-#### MOE: Pastor Samuel
+#### MOE: Pastor Samuel ####
 
 - Joshua 1:3-4 - Every land that the sole of your feet shall tread upon shall be your coast.
 
-#### Positive Confession: Pastor Albert
+#### Positive Confession: Pastor Albert ####
 
 - Loaded with all kinds of benefits
 - Gentiles are coming to my light
@@ -330,12 +330,12 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - I am of the power and might of the Lord. My life aspects are blessed and flourishes.
 - I see God and His glory in my life. I am an heir and I walk in authority, favour, abundance and showcase the glory of my God.
 
-#### Exhortation: Pastor Cosmos - What to seek as a child of God?
+#### Exhortation: Pastor Cosmos - What to seek as a child of God? ####
 
 - Col 3:1 - If ye then be risen with Christ, seek those things which are above, where Christ sits on the right hand of God. What sits above? It is `Glory`. You were created for the glory of God.
 - Whatsoever you do, do all unto the Glory of God. There is glory hidden in whatever you do. Men through faith conquered nations. The situations you face are platforms for the message to be preached. The glory is in the situation you are facing now for the kingdom of God is showed through the demonstration of power.
 
-#### Rhema: Ps. Richard - Upholding Your Faith
+#### Rhema: Ps. Richard - Upholding Your Faith ####
 
 - Your principles of faith shows the levels of faith you have.
 - 1 Pet 4:14 - The spirit of glory and of God. This is the spirit you receive when you are born again. This spirit does not come in His raw state but comes with packages...riches of the glory, eyes of your understanding be enlightened, the hope of His calling.
@@ -348,19 +348,19 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 17th May, 2026 ###
 
-#### MOE: Elder George
+#### MOE: Elder George ####
 
 - Isa 10:27 - It shall come to pass in that day that your burden shall be taken off your shoulder and yoke shall be destroyed because of the anointing.
 - 1Cor 16:9 - Great door and effectual is opened unto me and there are many adversaries.
 
-#### Exhortation: Pastor Derrick - Loving Jesus Sincerely
+#### Exhortation: Pastor Derrick - Loving Jesus Sincerely ####
 
 - Eph 6:24 - Grace be with all them that love Lord Jesus Christ sincerely.
 - John 21:5-15 - The statement Jesus made "loveth me more then these?" was not a mere statement. What He means is Do we love Him more than the things we desire? If God provides all that we want, would we be able to love Him genuinely?
 - Gal 4:19 - Every new born has the seed of Christ in them but Christ must be formed in them.
 - Acts 16:6 -
 
-#### Rhema: Ps. Richard - Upholding Your Faith 2
+#### Rhema: Ps. Richard - Upholding Your Faith 2 ####
 
 - Two ways to uphold faith - The faith and Your faith
 - The life we live in the flesh is being liveed in the faith of our Lord Jesus. We then grow within to be full of faith.
@@ -377,7 +377,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 24th May, 2026 ###
 
-#### Exhortation: Pastor Gad - How To Activate The Presence of God
+#### Exhortation: Pastor Gad - How To Activate The Presence of God ####
 
 - Gen 4:1,17,25 | 1Sam 1:19 - They knew their wives and bore a child.
 - You don't know anybody unless you have an intimacy with the other. With intimacy, you have to make the effort. James 4:8 - Draw nigh unto God and He will draw nigh unto you.
@@ -389,7 +389,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Eph 5:18 - Be not drunk with wine, wherein excess but be filled with the Spirit.
 - A man without intimacy has no direction from God.
 
-#### Rhema: Ps. Richard - Power Of Faith
+#### Rhema: Ps. Richard - Power Of Faith ####
 
 - You must be much interested in living out the will of God.
 - John 6:29 - This is the work of God. Look for an opportunity to do the work of God everywhere you go because the Lord Jesus will enquire of you that the works He gave you, did you do them?
@@ -404,7 +404,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 31st May, 2026 ###
 
-#### Exhortation: Pastor Samuel Akese - Things of the Flesh and Spirit
+#### Exhortation: Pastor Samuel Akese - Things of the Flesh and Spirit ####
 
 - There are those who live according to the flesh and those who live according to the spirit.
 - To live under the Spirit means to live under the influence and instructions of the Spirit.
@@ -412,7 +412,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Man is first a Spirit that has a soul residing in the flesh. Our true identity as a man is a Spirit.
 - You must engage in things to build your spirit as a spiritual being.
 
-#### Rhema: Ps. Richard - Power Of Faith Cont'd
+#### Rhema: Ps. Richard - Power Of Faith Cont'd ####
 
 - Talks cannot change the heart of a man. It takes the Holy Spirit to fully convict the heart of a man.
 - Everyone who is a soul winner is an intercessor by nature. Out of 100, God finds 1 as a soul winner. The probability is very small.
@@ -433,7 +433,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 7th June, 2026 ###
 
-#### Rhema: Ps. Richard - Covenant Sunday: Being Rich Towards God
+#### Rhema: Ps. Richard - Covenant Sunday: Being Rich Towards God ####
 
 - There is riches towards God, your family, the world.
 - Being rich towards self mostly makes someone selfish. They would rather keep their money than let someone die or suffer.
@@ -454,7 +454,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 14th June, 2026 ###
 
-#### Rhema: Ps. Richard - The Essence of Giving Testimonies
+#### Rhema: Ps. Richard - The Essence of Giving Testimonies ####
 
 - God is a show man and wants to be known.
 - Your testimony is the weapon to display against the enemy to shake him.
@@ -468,7 +468,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 21st June, 2026 ###
 
-#### Exhortation: Ps. Edmund - Addiction
+#### Exhortation: Ps. Edmund - Addiction ####
 
 - 1 Cor 16:5 - The household of Stephanas were addicted to the ministry of the saints.
 - Anything you become consistent with forms an addictive ability within you.
@@ -478,7 +478,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Your life is but for a short time, get busy with the most important things in life and be addicted to the most important things in life.
 - There are some things that are not necessary in your course and you must deny them.
 
-#### Rhema: Ps. Richard - Our Fellowship With The Spirit
+#### Rhema: Ps. Richard - Our Fellowship With The Spirit ####
 
 - 2 Cor 11:2 -
 - Eph 5:23-25 -
@@ -498,7 +498,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 5th July, 2026 ###
 
-#### Rhema: Ps. Richard - Divine Encounter - Grace
+#### Rhema: Ps. Richard - Divine Encounter - Grace ####
 
 - Pro 8:17 - I love them that love me, and those that seek me early shall find me.
 - Eph 3:7 - I was made a minister according by the grace of God to the gift of the gospel.
@@ -519,7 +519,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 9th August, 2026 ###
 
-#### Rhema: Ps. Richard - Ways of Honouring
+#### Rhema: Ps. Richard - Ways of Honouring ####
 
 - Honour is the value you place on someone
 - You can honour God with your substance - Math 23:23
@@ -528,13 +528,13 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 16th August, 2026 ###
 
-#### Exhortation: Ps. Aba Grace
+#### Exhortation: Ps. Aba Grace ####
 
 - Labour with passion
 - Labor with zeal and your reward will be immense
 - We appeared on this earth for a purpose and hence we must labour as well for God
 
-#### Rhema: Ps. Richard - Relevance of Honouring
+#### Rhema: Ps. Richard - Relevance of Honouring ####
 
 - Mal 1:6 -
 - Heb 13:17 - Obey them that have the rule over you that they may do it with joy, and not with grief: for that is unprofitable for you.
@@ -552,12 +552,12 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 23rd August, 2026 ###
 
-#### Exhortation: Ps. Samuel Akese
+#### Exhortation: Ps. Samuel Akese ####
 
 - Eccl 7:21 - Also take no heed unto all words that are spoken
 - Learn the attitude of guarding your heart. Ppro 4:20-24 - Guard your heart all your days
 
-#### Rhema: Ps. Gad - Prayer: Preservation of a Man's Spirit
+#### Rhema: Ps. Gad - Prayer: Preservation of a Man's Spirit ####
 
 - Gen 19:27 -
 - Isa 56:7 - Even them will I bring to my holy mountain. Every spiritual exercise is like a mountain till you come to a point where "make them joyful in my house of prayer". One way to like prayer is being an ardent student of the Word of God.
@@ -576,7 +576,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 30th August, 2026 ###
 
-#### Exhortation: Ps. Solomon
+#### Exhortation: Ps. Solomon ####
 
 - Rom 12:2 - Don’t copy the behavior and customs of this world, but let God transform you into a new person by changing the way you think. God has its mold of changing mankind into the form he wants. We are of God and our origin is of God.
 - Life should be conciously and deligently lived.
@@ -587,7 +587,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Transformation is a mind beehaviour.
 - In the end you will know God’s will for you, which is good and pleasing and perfect.
 
-#### Rhema: Ps. Richard - The Gift of God
+#### Rhema: Ps. Richard - The Gift of God ####
 
 - Pro 18:16 - A man's gift makes room for him and brings him before great men
 - There are gift, gifts, man's gift, and gift of the church.
@@ -615,7 +615,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 1st September, 2026 - Prayer and Thanksgiving Service ###
 
-#### Exhortation: Ps. Gad
+#### Exhortation: Ps. Gad ####
 
 - Anybody that does not have any relevance in God's kingdom has zero prayer life.
 - Col 1:9 - That ye may be filled with the knowledge of His will. It is very difficult to pray about God's purpose if you're not
@@ -629,7 +629,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Ps 16:8 - Every path you have to make is summed up in the Spirit.
 - It takes divine alignment and inspiration on how to make choices and the inspiration to do this is lumped up in your Spirit.
 
-#### Rhema: Ps. Richard
+#### Rhema: Ps. Richard ####
 
 - Luke 24:39-43 - They tarried and praise and blesed God continually.
 - In the atmosphere of praise and prayer, a lot of miracles happen.
@@ -639,7 +639,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 
 ### 13th September, 2026 ###
 
-#### Exhortation: Ps. Eugene
+#### Exhortation: Ps. Eugene ####
 
 - Jer 29:11 - It the thoughts of God to bring everyone into an expected end.
 - How can someone be against hope and be in hope? Hope means expectations.
@@ -649,7 +649,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - We are pressed on everyside but the Hope of God sustains us.
 - The righteous expectations shall never be cut short. The criteria is "the righteous - following the standards and ways of God".
 
-#### Rhema: Ps. Richard - The Gift of Love
+#### Rhema: Ps. Richard - The Gift of Love ####
 
 - Gal 5:22 - The fruit of the Spirit is love...
 - Every fruit comes out of a seed. What God gives a man is not a fruit but a seed.
@@ -686,7 +686,7 @@ Kinds of Love
 
 ### 20th September, 2026 ###
 
-#### Exhortation: Ps. Emmanuel - Being Unstoppable In Life
+#### Exhortation: Ps. Emmanuel - Being Unstoppable In Life ####
 
 - 2 Pet 1:3 - According as his divine power hath given unto us all things that pertain unto life and godliness.
 - Everything that pertains to life comes from the knowledge of him that hath called us to glory and virtue.
@@ -698,7 +698,7 @@ Kinds of Love
 - Being unmovable in life is - seek knowledge, unlearn to relearn. As you walk with God, God gives you a new knowlede for a new movement.
 - A transformed mind is a transformed life.
 
-#### Rhema: Ps. Gad - The Dew of Hermon
+#### Rhema: Ps. Gad - The Dew of Hermon ####
 
 - Prayer is the lifeline of a believer.
 - Gen 2:7 - And man became a living soul
@@ -723,7 +723,7 @@ Kinds of Love
 
 ### 27th September, 2026 ###
 
-#### Exhortation: Ps. Cosmos - Called to Manifest Virtue & Glory
+#### Exhortation: Ps. Cosmos - Called to Manifest Virtue & Glory ####
 - Isa 43:7 - Even every one that is called by my name: for I have created him for my glory. We have been born to express the glory of God. Matth 5:14 - Ye are the light of the world. A city that is set on an hill. Zech 14:6-7 - Light will be bright.
 - Micah 4:1-2 - the Lord shall be established in the top of the mountains. A city set on a hill is a city of the prayer.
 - Matth 5:15 - Neither do men light a candle, and put it under a bushel, but on a candlestick.
@@ -733,7 +733,7 @@ Kinds of Love
 - These are the days of my glory. We are the workmanship of God and vessels crafted to showcase His glory.
 - Ps 24
 
-#### Rhema: Gift of Love Cont'd
+#### Rhema: Gift of Love Cont'd ####
 - Loving God is the love we express and God's love is the love God expresses towards us.
 - The love of God was expressed by giving His Son Jesus Christ - laying off which you treasure most.
 - The fact that God loves us does not mean we love Him back.
@@ -755,7 +755,7 @@ Kinds of Love
 
 
 ### 11th October, 2026 ###
-#### Exhortation: Ps. Solomon - Walk As Children of Light
+#### Exhortation: Ps. Solomon - Walk As Children of Light ####
 - Eph 5:8 - For ye were sometimes darkness, but now are ye light in the Lord: walk as children of light. This scripture says 'ye
 were sometimes in darkness but now ye are in the light'. 
 - In the midst of every darkness, there is a potential ability of light, just that the light is dim.
@@ -767,7 +767,7 @@ when light meets an opaque object.
 - The potential light given to children of light is the Holy Ghost. Darkness doesnt yell and argue with light...it begins to move,
 vanish, flee when darkness meets light.
 
-#### Rhema - Ps. Richard: How The Love Of God Can Be Corrupted In Ministry
+#### Rhema - Ps. Richard: How The Love Of God Can Be Corrupted In Ministry ####
 - Whether you like it or not, you will be offended in church. It is virtually impossible for offenses not to happen in church.
 - Luke 17:1 - It is impossible but that offenses will come: but woe unto him, through whom they come!
 - The person thorugh whom an offense came is in more serious that the offendee, and it is much better for the offendee to pray for
@@ -788,7 +788,7 @@ leave your place for yielding creates great offenses.
 
 
 ### 18th October, 2026 ###
-#### Exhortation: Ps. Solomon - Becoming Servant Of The Gospel
+#### Exhortation: Ps. Solomon - Becoming Servant Of The Gospel ####
 - Eph 3:7 - I was made a minsiter according to the grace of Good given unto me by the effectual working of His power.
 - Becoming God's servant is not by availability but grace.
 - Grace is divine enablement or empowerment. You cannot walk in imapct without the Holy Spirit.
@@ -796,7 +796,7 @@ leave your place for yielding creates great offenses.
 - Even Jesus needed the grace of God to pray at certain point in life.
 - Heb 4:16 - Come boldly unto the throne of grace that we may obtain mercy and find grace to help in time of need.
 
-#### Rhema - Ps. Richard: How To Handle a Vexed Soul
+#### Rhema - Ps. Richard: How To Handle a Vexed Soul ####
 - You cannot change any human being on earth to follow your ways but God rather changes men.
 - So far as we are in our mortal bodies, we cannot change the heart of men but change comes indirectly through the Holy Spirit.
 - It is impossible for a reaction not to occur without an action. Your concern is to focus on the action eg: by praying for the 
@@ -814,7 +814,7 @@ power of God through His Spirit to change a man.
 
 
 ### 25th October, 2026 ###
-#### Exhortation: Ps. Aba - Accessing Divine Secrets
+#### Exhortation: Ps. Aba - Accessing Divine Secrets ####
 - Eph 3:5 - Which in other ages was not made known unto the sons of men, as it is now revealed unto his holy apostles and prophets by the Spirit;
 - Things have been concealed in this world and so in the God. God has put mysteries in Him. Jesus had to go so the Spirit of God will come for us to search these mysteries.
 - We cannot use our canal mind to understand God's mysteries.
@@ -822,7 +822,7 @@ power of God through His Spirit to change a man.
 - One divine idea from the Holy Spirit can outperform years of error and trials.
 - The Spirit of God is our search engin and He will be a blessing unto our life.
 
-#### Rhema - Ps. Richard: Digging Deeper Into Prayer
+#### Rhema - Ps. Richard: Digging Deeper Into Prayer ####
 - You can be frustrated in prayer when you have solid assurance of the basics of prayer
 - Phil 3:13-15 - Brethren, I count not myself to have apprehended: but this one thing I do, forgetting those things which are behind, and reaching forth unto those things which are before. I press toward the mark for the prize of the high calling of God in Christ Jesus.
 - Dont impose your self righteousness on God. Count the things you have done in the past as loss and reaching forth unto things which are before. There are things ahead of you and you'd have to press toward a mark in order to achieve the prize of higher calling.
