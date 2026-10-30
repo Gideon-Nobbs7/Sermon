@@ -1,4 +1,4 @@
-### 8th Feb, 2026
+### 8th Feb, 2026 ###
 
 #### Exhortation: Ps. Derrick - The Spirit of Excellence
 
@@ -24,7 +24,7 @@
 
 Hind feet and set me upon a high end
 
-### 15th Feb, 2026
+### 15th Feb, 2026 ###
 
 #### MOE: Elder Elvis
 
@@ -85,7 +85,7 @@ The Lord can be closer to you but your spirit is weak.  Eph 6:10 - Finally, my b
   Being filled up with the Spirit is building up your spirit of might. The filling up is like a capillary action where an action rises
   or builds up your mighty spirit
 
-### 22nd Feb, 2026
+### 22nd Feb, 2026 ###
 
 #### Exhortation: Ps. Albert -
 
@@ -113,7 +113,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Eph 1:19-20 - And what is the exceeding greatness of his power to us-ward who believe, according to the working of his mighty power. The power that exceeds every greatness on earth according to His mighty power. The Spirit of might makes you become extraordinary man. You walk in the realm of miracles and power.
 - Micah 3:8 - But truly I am full of power by the spirit of the Lord, and of judgment, and of might; The spirit of the Lord, judgment, might causes you to walk in extreme power. PP
 
-### 1st Mar, 2026
+### 1st Mar, 2026 ###
 
 #### Rhema: Ps. Richard - The Spirit of Might: Atmosphere of Miracles
 
@@ -126,14 +126,14 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - We are planted in the rivers of living water because we have been fully submerged in the Holy Ghost - Matth 3:11. In the new testament,
   we are in the waters of the Holy Ghost and as you start praying in the Holy Ghost, the water rises so you can be submerged, be not drunk with wine but with the Holy Ghost
 
-### 8th Mar, 2026
+### 8th Mar, 2026 ###
 
 #### Rhema: Ps. Richard - The Spirit of Might: Atmosphere of Miracles
 
 - Acknowledge God for His dignity
 - Honor His name and who He is: Great God of the universe, reigns the cherubs, omnipotent God, I am that I am. Praise be to God and His holy name.
 
-### 15th Mar, 2026
+### 15th Mar, 2026 ###
 
 #### MOE: Elder Janet
 
@@ -170,7 +170,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Exo 30:7-8 - Aaron shall burn sweet incense every morning day by day. In the days of the old, God did like their incense
   more than their prayers.
 
-### 29th Mar, 2026
+### 29th Mar, 2026 ###
 
 #### Rhema: Ps. Richard - The Holy Ghost Baptism
 
@@ -190,7 +190,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - 1 Cor 12:13 - We are baptized into one body by One Spirit and have all been made to drink into one Spirit
 - Acts 4:31 - When they had prayed, they were all filled with the Holy Ghost, and they spoke the word of God with boldness.
 
-### 5th Apr, 2026 - Praying For The Nation Ghana
+### 5th Apr, 2026 - Praying For The Nation Ghana ###
 
 #### Ps. Solomon
 
@@ -230,7 +230,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Heb 13:15 - By him therefore let us offer the sacrifice of praise to God continually, that is, the fruit of our lips giving thanks to his name. Every sacrifice gives praise to the Lord which is the Sacrifice of Praise and Evening Sacrifice of lifting up of hands. These are the liviing sacrifice during a praise session.
 - Ps 63:4 - Thus will I bless thee while I live: I will lift up my hands in thy name. The hand that has been lifted is to bless the Holy name of God.
 
-### 12th Apr, 2026
+### 12th Apr, 2026 ###
 
 #### Exhortation: Pastor Edmond
 
@@ -258,7 +258,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Acts 2:38 - Repent and be baptized every one of you in the name of Jesus (Baptism into the name) for the remissions of sins and ye shalll receive the gift of the Holy Ghost(Baptism into the Spirit)
 - Matth 28:19 - Goo ye therefore and teach all nations baptizinng them in the name of Father, Son and Holy Ghost.
 
-### 19th Apr, 2026
+### 19th Apr, 2026 ###
 
 #### MOE: Pastor Albert
 
@@ -291,7 +291,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - 1 Pet 1:23 - Being born again not of corruptible but incorruptible by the word of God.
 - Eph 5:25-26 -
 
-### 26th Apr, 2026 - Praise and Prophetic Service
+### 26th Apr, 2026 - Praise and Prophetic Service ###
 
 #### MOE: Pastor Emma
 
@@ -300,7 +300,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - 1 Sam 10:5-6 - And the Spirit of the Lord will come upon thee and thou shall be turned into another man.
 - Isa 61:1-3 - The Spirit of the Lord is upon me to preach good tidings and proclaim the acceptable year of the Lord and appoint unto them that mourn in Zion and give to the the beauty of ashes, that they might be called trees of righteousness.
 
-### 3rd May, 2026 - PFTNG
+### 3rd May, 2026 - PFTNG ###
 
 #### MOE: Pastor Derrick
 
@@ -316,7 +316,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Jer 30:17 - I will restore health to you, and your wounds and I will heal declares the Lord.
 - Daniel 1:17 - God gave them knowledge and skill in all wisdom.
 
-### 10th May, 2026
+### 10th May, 2026 ###
 
 #### MOE: Pastor Samuel
 
@@ -346,7 +346,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - God will do it when you are done with yours.
 - Don't stop praying until you get the victory note.
 
-### 17th May, 2026
+### 17th May, 2026 ###
 
 #### MOE: Elder George
 
@@ -375,7 +375,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Num 20:8 - Why did God say to Moses to speak unto the rock? Because the rock was the Spirit of Faith. Striking it means you are going against it...speaking meant moving from the works of hand (labour) to works of believing. When the Lord is the rock, it is about the works of your mouth and not the works of your hands.
 - Could it be that you have gotten a miracle and God will tell you He was not part?
 
-### 24th May, 2026
+### 24th May, 2026 ###
 
 #### Exhortation: Pastor Gad - How To Activate The Presence of God
 
@@ -402,7 +402,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Luke 12:47 - That servant which knew his lord's will, and neither did according to the will (did not do the work/will) shall be beaten with many stripes.
 - 
 
-### 31st May, 2026
+### 31st May, 2026 ###
 
 #### Exhortation: Pastor Samuel Akese - Things of the Flesh and Spirit
 
@@ -431,7 +431,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - The possibilities you would want to see is what you have to create in the Holy Ghost.
 - Prayer is what helps us to be filled with the Holy Ghost.
 
-### 7th June, 2026
+### 7th June, 2026 ###
 
 #### Rhema: Ps. Richard - Covenant Sunday: Being Rich Towards God
 
@@ -452,7 +452,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - PP: I receive manifold now and the in world to come.
 - Luke 16:10-13 - He that is faithful in that which is least is also faithful in much.
 
-### 14th June, 2026
+### 14th June, 2026 ###
 
 #### Rhema: Ps. Richard - The Essence of Giving Testimonies
 
@@ -466,7 +466,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Matth 8:4 - Upon what sum would God add more?
 - Testimony is more powerful than prophesying.
 
-### 21st June, 2026
+### 21st June, 2026 ###
 
 #### Exhortation: Ps. Edmund - Addiction
 
@@ -496,7 +496,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Acts 4:31, 15:28
 - It is about how you please the Holy Ghost in all your actions.
 
-### 5th July, 2026
+### 5th July, 2026 ###
 
 #### Rhema: Ps. Richard - Divine Encounter - Grace
 
@@ -508,7 +508,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Oil of visibility, fire, gladness, Grace, power of God that causes men to be established in their destiny
 - vs 10 - There are certain things God will never reveal to you except in the Spirit.
 
-### 19th July, 2026
+### 19th July, 2026 ###
 
 - It is literally a sin to not walk in victory. This is because Jesus Christ overcame death, any troops.
 - Everything God has planted for us becomes a reality. Everything you are facing must bow to the name of the Lord.
@@ -517,7 +517,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Phil 3:3 - We worship God in the Spirit and rejoice in Christ, and have no confidence in Christ Jesus. he has already done the victorious part for us.
 - We activate God's power on our behalf when we declare the name of Jesus.
 
-### 9th August, 2026
+### 9th August, 2026 ###
 
 #### Rhema: Ps. Richard - Ways of Honouring
 
@@ -526,7 +526,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Num 18:24 - But the tithes of the children of Israel which they offer as an heave offering unto the Lord.
 - The levites were to receive the tithe and present to God and after that present a tenth to God.
 
-### 16th August, 2026
+### 16th August, 2026 ###
 
 #### Exhortation: Ps. Aba Grace
 
@@ -550,7 +550,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
   - Be supplied with all your needs - Phil 4:19(People honouring Paul)
   - Everlasting habitation/friends - Luke 16:9
 
-### 23rd August, 2026
+### 23rd August, 2026 ###
 
 #### Exhortation: Ps. Samuel Akese
 
@@ -574,7 +574,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - Prayer changes a man and with it, everything can change
 - Rising up early in the morning.
 
-### 30th August, 2026
+### 30th August, 2026 ###
 
 #### Exhortation: Ps. Solomon
 
@@ -613,7 +613,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
   - Stir the gift of God in thee by putting on of hands by praying.
   - The gift becomes personalised when it has been stirred. It then needs an administration system around it to take it to the nations.
 
-### 1st September, 2026 - Prayer and Thanksgiving Service
+### 1st September, 2026 - Prayer and Thanksgiving Service ###
 
 #### Exhortation: Ps. Gad
 
@@ -637,7 +637,7 @@ John 4:27 - Peace I give unto you and let not your heart be troubled. Peace is t
 - One of the ways to access praise if praise and prayer.
 - Songs of joy focuses on man and Praise focuses on God.
 
-### 13th September, 2026
+### 13th September, 2026 ###
 
 #### Exhortation: Ps. Eugene
 
@@ -684,7 +684,7 @@ Kinds of Love
 - Isa 62:6-7 - God has set His standard. He will never move until men sacrifice to be the praise of the earth.
 - How do you sacrifice? You will need the Holy Ghost to help you everyday through love. How do you develop this love? 2 Thess 3:5 - And the Lord direct your hearts into the love of God, and into the patient waiting for Christ. Meaning it is not your doing but the Lord directing your heart into His love. You can also pray to increase in love - 1 John 2:5
 
-### 20th September, 2026
+### 20th September, 2026 ###
 
 #### Exhortation: Ps. Emmanuel - Being Unstoppable In Life
 
@@ -721,10 +721,9 @@ Kinds of Love
 - Exod 16:13 - And in the morning the dew lay round about the host...the dew laid round about manna
 - Ps 133:3 - As the dew of Hermon, and as the dew that descended upon the mountains of Zion: for there the Lord commanded the blessing, even life for evermore.
 
-### 27th September, 2026
+### 27th September, 2026 ###
 
 #### Exhortation: Ps. Cosmos - Called to Manifest Virtue & Glory
-
 - Isa 43:7 - Even every one that is called by my name: for I have created him for my glory. We have been born to express the glory of God. Matth 5:14 - Ye are the light of the world. A city that is set on an hill. Zech 14:6-7 - Light will be bright.
 - Micah 4:1-2 - the Lord shall be established in the top of the mountains. A city set on a hill is a city of the prayer.
 - Matth 5:15 - Neither do men light a candle, and put it under a bushel, but on a candlestick.
@@ -735,7 +734,6 @@ Kinds of Love
 - Ps 24
 
 #### Rhema: Gift of Love Cont'd
-
 - Loving God is the love we express and God's love is the love God expresses towards us.
 - The love of God was expressed by giving His Son Jesus Christ - laying off which you treasure most.
 - The fact that God loves us does not mean we love Him back.
@@ -753,3 +751,101 @@ Kinds of Love
   - If you have love in the Spirit, you'd have an interest in the Holy Ghost first before your will or interest - Acts 15:28
   - Gal 4:19 - My little children, of whom I travail in birth again until Christ be formed in you. The will of God can never be birthed forth without travail which is praying with the Holy Ghost to birth the will of God, which is Christ.
   - Isa 66:8 - ...for as soon as Zion travailed, she brought forth her children.
+
+
+
+### 11th October, 2026 ###
+#### Exhortation: Ps. Solomon - Walk As Children of Light
+- Eph 5:8 - For ye were sometimes darkness, but now are ye light in the Lord: walk as children of light. This scripture says 'ye
+were sometimes in darkness but now ye are in the light'. 
+- In the midst of every darkness, there is a potential ability of light, just that the light is dim.
+- As a child of light, we must show a proof as a child of light. We must let our light shine so bright before men.
+- Darkness doesnt have any substance but a vacuum. 
+- What happens when you are walking as a child of light but still going through darkness? Light can shine but darkness is created
+when light meets an opaque object.
+- Arise and deal with the opaque object because your light has come.
+- The potential light given to children of light is the Holy Ghost. Darkness doesnt yell and argue with light...it begins to move,
+vanish, flee when darkness meets light.
+
+#### Rhema - Ps. Richard: How The Love Of God Can Be Corrupted In Ministry
+- Whether you like it or not, you will be offended in church. It is virtually impossible for offenses not to happen in church.
+- Luke 17:1 - It is impossible but that offenses will come: but woe unto him, through whom they come!
+- The person thorugh whom an offense came is in more serious that the offendee, and it is much better for the offendee to pray for
+the offender.
+- Jesus knew Peter was going to offend Him so He prayed for Peter way beforehand.
+- Everybody has a reason to be offended. It is out of love we say "let's overcome offense with love."
+- Offense come primarily because people have invested their time and resources.
+- Offense is a seed that develops root called bitterness and grows into fruit called betrayal or chaotic.
+- It is better to overcome it at the seed stage.
+- See how possible best to solve offenses when your people attitude change towards your work.
+- Look beyond the offense so long as your eyes can see what God has given to us.
+- Dont see offenses with the eyes of men but with the eyes of God
+- For ministry, the work and ministry of Jesus Christ can be discredited and blamed - 2 Cor 6:3
+- Acts 24:16 - Therefore I always exercise and discipline myself a conscience void of offense : pray for the one that offended you and for yourself.
+- Ecc 10:4 - If the spirit of the ruler rise up against thee, leave not thy place; for yielding pacifieth great offenses. Dont 
+leave your place for yielding creates great offenses.
+
+
+
+### 18th October, 2026 ###
+#### Exhortation: Ps. Solomon - Becoming Servant Of The Gospel
+- Eph 3:7 - I was made a minsiter according to the grace of Good given unto me by the effectual working of His power.
+- Becoming God's servant is not by availability but grace.
+- Grace is divine enablement or empowerment. You cannot walk in imapct without the Holy Spirit.
+- The key ingrediient to be effectual as a minsiter is Grace. 1 Cor 15:10 - I am what I am because of the grace of God.
+- Even Jesus needed the grace of God to pray at certain point in life.
+- Heb 4:16 - Come boldly unto the throne of grace that we may obtain mercy and find grace to help in time of need.
+
+#### Rhema - Ps. Richard: How To Handle a Vexed Soul
+- You cannot change any human being on earth to follow your ways but God rather changes men.
+- So far as we are in our mortal bodies, we cannot change the heart of men but change comes indirectly through the Holy Spirit.
+- It is impossible for a reaction not to occur without an action. Your concern is to focus on the action eg: by praying for the 
+person vexing you heart to be turned. If you need a faster reaction, add the fasting catalyst.
+- 1 John 1:7 - If you have offenses and are vexed, you dont have the power to decide not to do again but it is the ability and
+power of God through His Spirit to change a man.
+- Every man has an ego and this ego counteracts every bad deed done against him. The best you can do is enter into the light spectrum of God to see how God sees, perceive how God perceives.
+- The way God sees is not the same way man sees.
+- Heaven hears the prayer of the saints.
+- 1 John 5:16 - Sin unto death is sin which departs you from the faith (meaning it is unforgievn). A man which sins not unto death, we can ask for life for the man and God will grant him life.
+- 1 Sam 12:23 - God forbid that I should sin against the Lord in ceasing to pray for you. It is incorrect to go about telling others a brother's mistake hapazardl but rather pray for the brother who commited the sin/wrong.
+- Lamentation 3:22 - It is of the Lord's mercies that we are not consumed, because his compassions fail not.
+- God will hear you when you cry out  - Lam 3:22 - thou heardest them from heaven; and according to thy manifold mercies thou gavest them saviours...
+
+
+
+### 25th October, 2026 ###
+#### Exhortation: Ps. Aba - Accessing Divine Secrets
+- Eph 3:5 - Which in other ages was not made known unto the sons of men, as it is now revealed unto his holy apostles and prophets by the Spirit;
+- Things have been concealed in this world and so in the God. God has put mysteries in Him. Jesus had to go so the Spirit of God will come for us to search these mysteries.
+- We cannot use our canal mind to understand God's mysteries.
+- The Spirit of God dwells in every believer and your testimony depends on how well you use the Spirit of God.
+- One divine idea from the Holy Spirit can outperform years of error and trials.
+- The Spirit of God is our search engin and He will be a blessing unto our life.
+
+#### Rhema - Ps. Richard: Digging Deeper Into Prayer
+- You can be frustrated in prayer when you have solid assurance of the basics of prayer
+- Phil 3:13-15 - Brethren, I count not myself to have apprehended: but this one thing I do, forgetting those things which are behind, and reaching forth unto those things which are before. I press toward the mark for the prize of the high calling of God in Christ Jesus.
+- Dont impose your self righteousness on God. Count the things you have done in the past as loss and reaching forth unto things which are before. There are things ahead of you and you'd have to press toward a mark in order to achieve the prize of higher calling.
+
+```
+├── Christ - the ultimatum of marks
+├── mark
+```
+- God has set marks and we can also set marks for ourselves in prayer. God can give a mark/goal and when do you stop? You only stop when you have achieved your objective. vs 14(TLB) - I strain to reach the end of the race and receive the prize for which God is calling us up to heaven.
+- 1 Cor 9:24-25 - Do you not know that in a race all the runners run, but only one gets the prize. As in a race, the people who reaches the mark get the prize.
+- Be careful of how you pray because you can get anyhow results if you pray anyhow.
+- Obedience is next after setting a mark where you follow the instructions regarding the mark.
+- There is an energy you must attain the Spirit for a reactant to be turned into a product/results. The mark you have set, there is a certain energy you must attain for the mark to actualise.
+- The more you pray, the more you give your spirit kinetic energy to run towards the mark.
+- Attributes related to increasing your chances of actualising your product - Prayer, Fasting, Giving.
+- God will not give you anything if you will not meet the mark.
+- Christ is a solid rock and you need to climb to stand on the rock.
+- James 5:16 - ...the earnest and heartfelt prayer of the righteous one makes tremendous energy available. Heartfelt prayer is a prayer on your heart.
+- Ps 66:3 - How terrible art the works of God through the increasing of thy power shall your enemies submit themselves unto thee.
+- Signs that show you have gotten to the mark:
+  - Joy
+  - Peace
+  - Word from God
+  - Vision
+- Praying without ceasing means you pray till you get to the mark of victory.
+- 

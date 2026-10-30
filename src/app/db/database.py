@@ -40,6 +40,11 @@ CREATE TABLE IF NOT EXISTS chat_history (
 
 CREATE INDEX IF NOT EXISTS idx_chat_history_chat ON chat_history(chat_id, id);
 
+CREATE TABLE IF NOT EXISTS telegram_updates (
+    update_id   INTEGER PRIMARY KEY,
+    received_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 CREATE TABLE IF NOT EXISTS bible_verses (
     ref         TEXT PRIMARY KEY,
     text        TEXT NOT NULL,
@@ -98,6 +103,22 @@ def init_db(
     conn.executescript(_TABLE_SQL)
     conn.executescript(_vec0_sql(dimensions))
     conn.commit()
+
+
+async def claim_telegram_update(update_id: int, db_path: Optional[str] = None) -> bool:
+    async with get_async_db(db_path) as conn:
+        await conn.execute(
+            "DELETE FROM telegram_updates "
+            "WHERE received_at < datetime('now', '-2 days')"
+        )
+        cur = await conn.execute(
+            "INSERT OR IGNORE INTO telegram_updates (update_id) VALUES (?)",
+            (update_id,),
+        )
+        claimed = cur.rowcount == 1
+        await cur.close()
+        await conn.commit()
+    return claimed
 
 
 @contextmanager

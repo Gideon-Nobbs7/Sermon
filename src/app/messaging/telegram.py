@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import logging
 from typing import Optional
 
 import telegram
 
 from ..services.qa import QAService
+
+logger = logging.getLogger(__name__)
+_ERROR_ANSWER = "I couldn't answer that right now. Please try again later."
 
 
 class TelegramMessenger:
@@ -20,10 +24,16 @@ class TelegramMessenger:
             return None
 
         chat_id = message.chat_id
-        result = await self.qa.answer(str(chat_id), message.text)
+        try:
+            result = await self.qa.answer(str(chat_id), message.text)
+            answer = result.answer
+        except Exception:
+            logger.exception("failed to answer Telegram update %s", update.update_id)
+            answer = _ERROR_ANSWER
+
         if self.bot is not None:
-            await self.bot.send_message(chat_id=chat_id, text=result.answer)
-        return result.answer
+            await self.bot.send_message(chat_id=chat_id, text=answer)
+        return answer
 
     async def send_message(self, chat_id, text) -> None:
         if self.bot is not None:

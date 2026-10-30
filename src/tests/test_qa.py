@@ -1,5 +1,7 @@
 import asyncio
+from datetime import date
 
+import src.app.services.qa as qa_module
 from src.app.db.database import get_connection, init_db
 from src.app.schemas.sermon import Chunk, SourceType
 from src.app.services.history import ChatHistoryStore
@@ -29,9 +31,11 @@ class FakeRetriever:
 class FakeGenerator:
     def __init__(self):
         self.seen_verses = None
+        self.seen_history = None
 
     async def generate(self, chunks, question, history=None, verses=None):
         self.seen_verses = verses
+        self.seen_history = history
         return "answer"
 
 
@@ -54,10 +58,10 @@ def _store(tmp_path):
     return ChatHistoryStore(db_path=str(db))
 
 
-def _chunk(scriptures=None):
+def _chunk(scriptures=None, sermon_date="2026-02-15"):
     return Chunk(
         id="c1", source_file="2026-Sermons.md", source_type=SourceType.SERMON,
-        date="2026-02-15", speaker="Ps. Richard", topic_title="The Spirit of Might",
+        date=sermon_date, speaker="Ps. Richard", topic_title="The Spirit of Might",
         scriptures=scriptures or [], text="note",
     )
 
@@ -85,6 +89,40 @@ def test_normal_path_returns_answer_and_sources(tmp_path):
     assert result.sources[0]["speaker"] == "Ps. Richard"
     turns = asyncio.run(store.recent("chat-1"))
     assert turns[-1]["content"] == "answer"
+
+
+def test_last_week_question_retrieves_previous_calendar_week_without_history(
+    tmp_path, monkeypatch
+):
+    class FrozenDate(date):
+        @classmethod
+        def today(cls):
+            return cls(2026, 10, 30)
+
+    class DateRangeRetriever:
+        def __init__(self):
+            self.date_range = None
+
+        async def retrieve_date_range(self, start, end):
+            self.date_range = (start, end)
+            return [_chunk(sermon_date="2026-10-25")]
+
+        async def retrieve(self, query, k=None):
+            raise AssertionError("last-week questions should use the date range")
+
+    monkeypatch.setattr(qa_module, "date", FrozenDate)
+    store = _store(tmp_path)
+    asyncio.run(store.append("chat-1", "user", "what was taught in March?"))
+    asyncio.run(store.append("chat-1", "assistant", "March answer"))
+    retriever = DateRangeRetriever()
+    generator = FakeGenerator()
+    qa = QAService(retriever, generator, store, timeout=5)
+
+    result = asyncio.run(qa.answer("chat-1", "what was taught last week?"))
+
+    assert retriever.date_range == (date(2026, 10, 19), date(2026, 10, 26))
+    assert result.sources[0]["date"] == "2026-10-25"
+    assert generator.seen_history == []
 
 
 def test_verses_resolve_and_reach_generator(tmp_path):

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+from datetime import date
 from typing import List, Optional, Sequence, Tuple
 
 from ..config import settings
@@ -58,6 +59,22 @@ class Retriever:
         if first_app_error is not None:
             raise first_app_error
         raise AppError(502, "All embedding providers failed.", "embeddings_all_failed")
+
+    async def retrieve_date_range(self, start: date, end: date) -> List[Chunk]:
+        async with get_async_db(self.db_path) as conn:
+            cur = await conn.execute(
+                """
+                SELECT id, source_type, source_file, date, speaker, topic_type,
+                       topic_title, scriptures, page, text
+                FROM chunks
+                WHERE source_type = ? AND date >= ? AND date < ?
+                ORDER BY date, id
+                """,
+                (SourceType.SERMON.value, start.isoformat(), end.isoformat()),
+            )
+            rows = await cur.fetchall()
+            await cur.close()
+        return [_row_to_chunk(row) for row in rows]
 
 
 def _row_to_chunk(row) -> Chunk:

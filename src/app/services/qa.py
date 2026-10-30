@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import List, Optional
+import re
+from datetime import date, timedelta
+from typing import List, Optional, Tuple
 
 from ..config import settings
 from ..schemas.qa import Answer
@@ -15,6 +17,7 @@ logger = logging.getLogger("app.qa")
 
 _NOT_FOUND = "I couldn't find anything on that in the sermons I have."
 _SLOW = "This is taking longer than expected - please try again in a moment."
+_LAST_WEEK_RE = re.compile(r"\b(?:last|previous)\s+week\b", re.IGNORECASE)
 
 
 class QAService:
@@ -48,15 +51,22 @@ class QAService:
 
     async def _answer(self, session_id: str, question: str, k: Optional[int]) -> Answer:
         turns = await self.history.recent(session_id)
-        query = self._retrieval_query(turns, question)
-
-        chunks = await self.retriever.retrieve(query, k or self.default_k)
+        date_range = _relative_date_range(question, date.today())
+        if date_range:
+            chunks = await self.retriever.retrieve_date_range(*date_range)
+            history = []
+        else:
+            query = self._retrieval_query(turns, question)
+            chunks = await self.retriever.retrieve(query, k or self.default_k)
+            history = turns
         if not chunks:
             await self._record(session_id, question, _NOT_FOUND)
             return Answer(answer=_NOT_FOUND, sources=[])
 
         verses = await self._resolve_verses(chunks)
-        answer_text = await self.generator.generate(chunks, question, history=turns, verses=verses)
+        answer_text = await self.generator.generate(
+            chunks, question, history=history, verses=verses
+        )
         await self._record(session_id, question, answer_text)
         return Answer(answer=answer_text, sources=[_source(c) for c in chunks])
 
@@ -99,3 +109,10 @@ def _source(chunk: Chunk) -> dict:
         "source_file": chunk.source_file,
         "page": chunk.page,
     }
+
+
+def _relative_date_range(question: str, today: date) -> Optional[Tuple[date, date]]:
+    if not _LAST_WEEK_RE.search(question):
+        return None
+    this_week_start = today - timedelta(days=today.weekday())
+    return this_week_start - timedelta(days=7), this_week_start

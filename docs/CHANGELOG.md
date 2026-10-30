@@ -121,3 +121,33 @@ What this round added:
   and checking everything is healthy.
 - The changelog page on the site reads this very file, so the
   website's history never falls behind the project.
+
+## Hosting on Vercel (8 Oct 2026)
+
+What this round changed:
+
+- Added a small entry file at the top of the project so Vercel can
+  find the app on its own. It was looking in the usual spots and the
+  app lived a couple of folders deeper, so the first deploy stopped
+  before it started.
+- The entry file does nothing except point Vercel at the app that
+  already existed, so nothing about how the bot behaves changed.
+
+## Cleaner replies in Telegram (30 Oct 2026)
+
+What this round changed:
+
+- Answers no longer show stray formatting marks around quoted phrases.
+- When Telegram repeats a message delivery, the bot recognizes it and
+  avoids sending the same answer or timeout notice again.
+- If the bot cannot answer, it sends one brief fallback reply.
+
+## Sermon date headings (30 Oct 2026)
+
+- Added closing marks to the sermon dates so the bot can recognize each
+  date consistently.
+
+## Questions about recent sermons (30 Oct 2026)
+
+- Questions about last week's teaching now use sermons from that week instead
+  of older passages that happen to sound similar.

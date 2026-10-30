@@ -71,6 +71,7 @@ def create_app(
 
     app = FastAPI(title="Sermon QA Bot", lifespan=lifespan)
     register_exception_handlers(app)
+    app.state.db_path = db_path
 
     @app.middleware("http")
     async def request_context_middleware(request, call_next):

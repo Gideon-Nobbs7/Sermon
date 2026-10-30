@@ -26,9 +26,11 @@ class FakeMessenger:
     def __init__(self, reply="ok"):
         self.reply = reply
         self.payload = None
+        self.calls = []
 
     async def handle_update(self, payload):
         self.payload = payload
+        self.calls.append(payload)
         return self.reply
 
 
@@ -100,6 +102,32 @@ def test_telegram_webhook_accepts_secret_and_handles(tmp_path, monkeypatch):
         resp = client.post("/webhook/telegram", json=payload, headers={"X-Telegram-Bot-Api-Secret-Token": "s3cret"})
     assert resp.status_code == 200
     assert resp.json() == {"ok": True}
+
+
+def test_telegram_webhook_ignores_retried_update_after_restart(tmp_path, monkeypatch):
+    monkeypatch.setattr(settings, "TELEGRAM_BOT_TOKEN", "123:fake")
+    monkeypatch.setattr(settings, "TELEGRAM_WEBHOOK_SECRET", "")
+    payload = {
+        "update_id": 42,
+        "message": {
+            "message_id": 10,
+            "date": 1756800000,
+            "chat": {"id": 123, "type": "private"},
+            "text": "hello",
+        },
+    }
+
+    with _client(tmp_path, FakeQA()) as client:
+        first = client.post("/webhook/telegram", json=payload)
+        first_messenger = client.app.state.telegram_messenger
+
+    with _client(tmp_path, FakeQA()) as client:
+        retry = client.post("/webhook/telegram", json=payload)
+        retry_messenger = client.app.state.telegram_messenger
+
+    assert first.status_code == retry.status_code == 200
+    assert first_messenger.calls == [payload]
+    assert retry_messenger.calls == []
 
 
 def test_whatsapp_webhook_returns_twiml(tmp_path):

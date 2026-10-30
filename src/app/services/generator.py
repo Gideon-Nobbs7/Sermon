@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from dataclasses import dataclass, field
 from typing import List, Optional, Sequence
 
@@ -19,6 +20,10 @@ Answer based ONLY on the provided context. Be precise and concise.
 Always cite the sermon date and speaker in your answer.
 If the context does not contain enough information, say so.
 Do not make up or extrapolate beyond the given context.
+
+Formatting:
+- Use plain text only. Do not use Markdown or asterisks for emphasis, lists, or headings.
+- Use quotation marks for quoted terms and scripture.
 
 When you state what a scripture says, follow these rules:
 - Tie every key point to the scripture reference given in its context block.
@@ -38,6 +43,11 @@ Good: The morning carries the "dew", the commanded blessing: "there the
 LORD commanded the blessing, even life for evermore" (Psalms 133:3).
 Bad: quoting a whole paragraph, or quoting verse wording that was not provided.
 """
+
+
+def _plain_text(text: str) -> str:
+    text = re.sub(r"(?m)^([ \t]*)\*[ \t]+", r"\1- ", text)
+    return text.replace("*", "")
 
 
 @dataclass
@@ -201,4 +211,4 @@ class Generator:
         content = choices[0].get("message", {}).get("content")
         if not content:
             raise AppError(502, f"{provider.name} returned empty content", f"{provider.name}_empty_content")
-        return content
+        return _plain_text(content)

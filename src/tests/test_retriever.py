@@ -1,4 +1,5 @@
 import asyncio
+from datetime import date
 
 import pytest
 
@@ -104,6 +105,22 @@ def test_retrieve_respects_k(tmp_path):
     fallback = FakeEmbeddingService([0.5, 0.5, 0.5])
     results = asyncio.run(_retriever(primary, fallback, db).retrieve("q", k=1))
     assert [c.id for c in results] == ["chunk_a"]
+
+
+def test_retrieve_date_range_returns_matching_sermons(tmp_path):
+    db = tmp_path / "retriever.db"
+    _seed(db)
+    retriever = _retriever(
+        FakeEmbeddingService([0.1, 0.2, 0.3, 0.4]),
+        FakeEmbeddingService([0.5, 0.5, 0.5]),
+        db,
+    )
+
+    results = asyncio.run(
+        retriever.retrieve_date_range(date(2026, 2, 10), date(2026, 2, 16))
+    )
+
+    assert [chunk.id for chunk in results] == ["chunk_b"]
 
 
 def test_retrieve_empty_corpus(tmp_path):

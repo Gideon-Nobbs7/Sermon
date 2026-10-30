@@ -72,6 +72,7 @@ def test_build_user_message_delimiters_context():
 def test_system_prompt_states_scripture_rules():
     assert "Never reproduce verse wording from memory" in SYSTEM_PROMPT
     assert "bare reference" in SYSTEM_PROMPT
+    assert "plain text only" in SYSTEM_PROMPT.lower()
 
 
 def test_build_user_message_includes_verses_block():
@@ -135,6 +136,21 @@ def test_generate_sends_deepseek_payload(monkeypatch):
     assert captured["json"]["thinking"] == {"type": "disabled"}
     assert captured["json"]["stream"] is False
     assert captured["json"]["messages"][0]["role"] == "system"
+
+
+def test_generate_removes_asterisk_formatting(monkeypatch):
+    async def fake_post(self, url, headers, json):
+        return _fake_response("On that day, **the womb** and *prayer*.\n\n  * Answer.")
+
+    monkeypatch.setattr(httpx.AsyncClient, "post", fake_post)
+
+    answer = asyncio.run(
+        Generator(providers=_providers()[:1], retries=1).generate(
+            [_chunk("note")], "what was taught?"
+        )
+    )
+
+    assert answer == "On that day, the womb and prayer.\n\n  - Answer."
 
 
 def test_generate_includes_history_turns(monkeypatch):

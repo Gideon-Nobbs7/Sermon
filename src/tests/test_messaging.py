@@ -20,11 +20,14 @@ TELEGRAM_UPDATE = {
 
 
 class FakeQA:
-    def __init__(self):
+    def __init__(self, error=None):
         self.calls = []
+        self.error = error
 
     async def answer(self, session_id, question, k=None):
         self.calls.append((session_id, question))
+        if self.error is not None:
+            raise self.error
         return Answer(answer="reply from qa", sources=[])
 
 
@@ -42,6 +45,25 @@ def test_telegram_parses_update_and_replies(monkeypatch):
     assert reply == "reply from qa"
     assert qa.calls == [("123", "hello")]
     send.assert_awaited_once_with(chat_id=123, text="reply from qa")
+
+
+def test_telegram_sends_one_safe_reply_when_qa_fails(monkeypatch):
+    qa = FakeQA(error=RuntimeError("provider failed"))
+    bot = telegram.Bot(token="123:fake")
+    send = AsyncMock()
+    monkeypatch.setattr(telegram.Bot, "send_message", send)
+    messenger = TelegramMessenger(qa_service=qa, bot=bot)
+
+    import asyncio
+
+    reply = asyncio.run(messenger.handle_update(TELEGRAM_UPDATE))
+
+    assert reply == "I couldn't answer that right now. Please try again later."
+    assert qa.calls == [("123", "hello")]
+    send.assert_awaited_once_with(
+        chat_id=123,
+        text="I couldn't answer that right now. Please try again later.",
+    )
 
 
 def test_telegram_ignores_non_text_updates():

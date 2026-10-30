@@ -285,6 +285,7 @@ Answer based ONLY on the provided context. Be precise and concise.
 Always cite the sermon date and speaker in your answer.
 If the context does not contain enough information, say so.
 Do not make up or extrapolate beyond the given context.
+Use plain text only. Do not use Markdown or asterisks.
 (+ scripture rules: tie each point to its reference, quote the shortest
 phrase from the provided verse text, never reproduce verse wording from
 memory, cite bare references when no verse text was provided.)
@@ -316,13 +317,13 @@ What did Pastor Richard say about the Spirit of Might?
 ```json
 {
   "answer": "Ps. Richard taught on the Spirit of Might across 3 dates:\n\n"
-            "1. **15th Feb, 2026** — The Spirit of Might is one of the 7 offices "
+            "1. 15th Feb, 2026 — The Spirit of Might is one of the 7 offices "
             "of the Holy Ghost (Isa 11:1-3). He emphasized that being strengthened "
             "with might by the Spirit in the inner man (Eph 3:16) empowers us.\n\n"
-            "2. **22nd Feb, 2026** — Continued that the quickness of a solution "
+            "2. 22nd Feb, 2026 — Continued that the quickness of a solution "
             "depends on your saturation with the Holy Ghost. The Spirit of Might "
             "makes you an extraordinary man walking in miracles.\n\n"
-            "3. **1st Mar, 2026** — The Spirit of Might creates an Atmosphere of "
+            "3. 1st Mar, 2026 — The Spirit of Might creates an Atmosphere of "
             "Miracles. Fruit-bearing is the foundation of blessings.",
   "sources": [
     {"date": "2026-02-15", "speaker": "Ps. Richard", "topic": "The Spirit of Might 1"},
@@ -331,6 +332,13 @@ What did Pastor Richard say about the Spirit of Might?
   ]
 }
 ```
+
+### 5.4 Relative date questions
+
+Questions containing "last week" or "previous week" use the previous
+Monday-to-Monday calendar window. Sermons in that date range are selected from
+SQLite before answer generation, without semantic ranking or prior chat history.
+Other questions continue to use vector similarity search.
 
 ---
 
@@ -427,7 +435,8 @@ Planned in later scopes:
 
 ## 8. SQLite Schema Design
 
-The database uses **two tables** — one for sermon text/metadata and one virtual table for vector search via sqlite-vec.
+The SQLite file stores sermon text and metadata, vector tables, chat history,
+scripture text, and Telegram update IDs used to suppress duplicate replies.
 
 ### Table: `sermons`
 
@@ -489,6 +498,19 @@ CREATE TABLE chat_history (
 );
 
 CREATE INDEX idx_chat_history_chat ON chat_history(chat_id, id);
+```
+
+### Table: `telegram_updates`
+
+Records Telegram update IDs before processing so a retried webhook does not
+run the question pipeline or send another reply. IDs older than two days are
+removed; Telegram retains pending updates for no more than 24 hours.
+
+```sql
+CREATE TABLE telegram_updates (
+    update_id   INTEGER PRIMARY KEY,
+    received_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
 ```
 
 ### Table: `bible_verses`
@@ -716,6 +738,11 @@ User ──► Caddy (TLS termination) ──► FastAPI (port 8000)
    • /ask <q>     — Ask a question (or just send text)
    • /help        — Usage instructions
 ```
+
+The webhook records each `update_id` before processing. A repeated delivery
+gets an immediate success response and does not send another answer. This is
+at-most-once sending: if Telegram's send result is ambiguous, the app does not
+retry it automatically.
 
 ### 11.2 WhatsApp (Twilio)
 
